@@ -83,5 +83,13 @@
   "main": "webpack.config.babel.js",
   "directories": {
     "test": "test"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mirolyubovN/test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mirolyubovN/test/issues"
+  },
+  "homepage": "https://github.com/mirolyubovN/test#readme"
 }
