@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #Preact Boilerplate / Starter Kit for a Weather App
 
 ## Set-Up Guide
@@ -93,3 +94,6 @@ Defining what component(s) to load for a given URL is easy and declarative. You 
   <C path="/c/:id" />
 </Router>
 ```
+=======
+# test
+>>>>>>> a46fe158e67d9c2b8fecaf5f41ac035cf3a48a2e
