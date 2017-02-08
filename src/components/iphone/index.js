@@ -38,8 +38,9 @@ export default class Iphone extends Component {
 	render() {
 		// check if temperature data is fetched, if so add the sign styling to the page
 		const tempStyles = this.state.temp ? `${style.temperature} ${style.filled}` : style.temperature;
-		
+
 		// display all weather data
+		/* input the wind speed in km/h*/
 		return (
 			<div class={ style.container }>
 				<div class={ style.header }>
@@ -47,8 +48,9 @@ export default class Iphone extends Component {
 					<div class={ style.conditions }>{ this.state.cond }</div>
 					<span class={ tempStyles }>{ this.state.temp }</span>
 				</div>
-				<div class={ style.details }></div>
-				<div class= { style_iphone.container }> 
+
+				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span></div>
+				<div class= { style_iphone.container }>
 					{ this.state.display ? <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ > : null }
 				</div>
 			</div>
@@ -59,12 +61,14 @@ export default class Iphone extends Component {
 		var location = parsed_json['current_observation']['display_location']['city'];
 		var temp_c = parsed_json['current_observation']['temp_c'];
 		var conditions = parsed_json['current_observation']['weather'];
+		var ws = parsed_json['current_observation']['wind_kph'];
 
 		// set states for fields so they could be rendered later on
 		this.setState({
 			locate: location,
 			temp: temp_c,
-			cond : conditions
-		});      
+			cond : conditions,
+			wind:ws
+		});
 	}
 }
