@@ -49,9 +49,10 @@ export default class Iphone extends Component {
 					<span class={ tempStyles }>{ this.state.temp }</span>
 				</div>
 
-				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span></div>
+				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span></div>
 				<div class= { style_iphone.container }>
 					{ this.state.display ? <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ > : null }
+
 				</div>
 			</div>
 		);
@@ -61,14 +62,16 @@ export default class Iphone extends Component {
 		var location = parsed_json['current_observation']['display_location']['city'];
 		var temp_c = parsed_json['current_observation']['temp_c'];
 		var conditions = parsed_json['current_observation']['weather'];
-		var ws = parsed_json['current_observation']['wind_kph'];
+		var ws = "Wind speed: " + parsed_json['current_observation']['wind_kph'] + "km/h";
+		var feelsLike = "Feels like : " + parsed_json['current_observation']['feelslike_c'] + "C";
 
 		// set states for fields so they could be rendered later on
 		this.setState({
 			locate: location,
 			temp: temp_c,
 			cond : conditions,
-			wind:ws
+			wind:ws,
+			feels:feelsLike
 		});
 	}
 }
