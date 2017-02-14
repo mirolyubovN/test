@@ -67,7 +67,7 @@ export default class Iphone extends Component {
 				</div>
 
 				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/><span class={ style.conditions  }> { this.state.test } </span></div>
-				<div class={ style.details }>
+				<div class={ style.details }> <br/><br/>
 				<table align="center">
 				<tr>
 					<td><span class={ style.conditions  }> { this.state.m3 } </span><span class={ style.conditions  }> { this.state.d1 } </span></td><td><span class={ style.conditions  }> { this.state.d2 } </span></td><td><span class={ style.conditions  }> { this.state.d3 } </span></td><td><span class={ style.conditions  }> { this.state.d4 } </span></td><td><span class={ style.conditions  }> { this.state.d5 } </span></td><td><span class={ style.conditions  }> { this.state.d6 } </span></td><td><span class={ style.conditions  }> { this.state.d7} </span></td>
