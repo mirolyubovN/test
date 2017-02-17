@@ -41,13 +41,13 @@ export default class Iphone extends Component {
 			error : function(req, err){ console.log('API call failed ' + err); }
 		})
 
-		/*url = "http://api.wunderground.com/api/6e014545bd8a1361/hourly/q/UK/London.json";
+		url = "http://api.wunderground.com/api/6e014545bd8a1361/hourly/q/UK/London.json";
 		$.ajax({
 			url: url,
 			dataType: "jsonp",
 			success : this.parseHourlyResponse,
 			error : function(req, err){ console.log('API call failed ' + err); }
-		})*/
+		})
 
 		// once the data grabbed, hide the button
 		this.setState({ display: false });
@@ -73,17 +73,12 @@ export default class Iphone extends Component {
 
 				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/><span class={ style.conditions  }> { this.state.test } </span></div>
 				<div class={ style.details }> <br/><br/>
-				<table align="center" >
-				<tr>
-					<td align="left"><span class={ style.conditions  }> { this.state.m3 } </span></td><td><span class={ style.conditions  }> { this.state.d1 } </span></td><td><span class={ style.conditions  }> { this.state.d2 } </span></td><td><span class={ style.conditions  }> { this.state.d3 } </span></td><td><span class={ style.conditions  }> { this.state.d4 } </span></td><td><span class={ style.conditions  }> { this.state.d5 } </span></td><td><span class={ style.conditions  }> { this.state.d6 } </span></td><td><span class={ style.conditions  }> { this.state.d7} </span></td>
-				</tr>
-				<tr>
-					<td align="left"><span class={ style.conditions  }> { this.state.m1 } </span></td><td><span class={ style.conditions  }> { this.state.w1 } </span></td><td><span class={ style.conditions  }> { this.state.w2 } </span></td><td><span class={ style.conditions  }> { this.state.w3 } </span></td><td><span class={ style.conditions  }> { this.state.w4 } </span></td><td><span class={ style.conditions  }> { this.state.w5 } </span></td><td><span class={ style.conditions  }> { this.state.w6 } </span></td><td><span class={ style.conditions  }> { this.state.w7 } </span></td>
-				</tr>
-				<tr>
-					<td align="left"><span class={ style.conditions  }> { this.state.m2 } </span></td><td><span class={ style.conditions  }> { this.state.l1 } </span></td><td><span class={ style.conditions  }> { this.state.l2 } </span></td><td><span class={ style.conditions  }> { this.state.l3 } </span></td><td><span class={ style.conditions  }> { this.state.l4 } </span></td><td><span class={ style.conditions  }> { this.state.l5 } </span></td><td><span class={ style.conditions  }> { this.state.l6 } </span></td><td><span class={ style.conditions  }> { this.state.l7 } </span></td>
-				</tr>
-				</table>
+				<div id = "test">
+				<br/>
+				</div>
+				<div id = "test2">
+				<br/>
+				</div>
 
 				 </div>
 				<div class= { style_iphone.container }>
@@ -92,7 +87,6 @@ export default class Iphone extends Component {
 			</div>
 		);
 	}
-//					{ this.state.display ? <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ > : null }
 
 	parseResponse = (parsed_json) => {
 		var location = parsed_json['current_observation']['display_location']['city'];
@@ -112,7 +106,7 @@ export default class Iphone extends Component {
 
 	}
 	parseWeaklyResponse = (parsed_json) => {
-	    var days = [];
+		var days = [];
 	    var maxweather = [];
 	    var minweather = [];
 	    var mes1 = "Min";
@@ -123,55 +117,38 @@ export default class Iphone extends Component {
 		maxweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'] );
 		minweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius'] );
 		}
-		// set states for fields so they could be rendered later on
-		this.setState({
-			d1:days[0],
-			d2:days[1],
-			d3:days[2],
-			d4:days[3],
-			d5:days[4],
-			d6:days[5],
-			d7:days[6],
-			w1:maxweather[0],
-			w2:maxweather[1],
-			w3:maxweather[2],
-			w4:maxweather[3],
-			w5:maxweather[4],
-			w6:maxweather[5],
-			w7:maxweather[6],
-			l1:minweather[0],
-			l2:minweather[1],
-			l3:minweather[2],
-			l4:minweather[3],
-			l5:minweather[4],
-			l6:minweather[5],
-			l7:minweather[6],
-			m1:mes1,
-			m2:mes2,
-			m3: mes3
+		const maxwr = maxweather.map((maxweather)=><td>{maxweather}</td>);
+		const minwr = minweather.map((minweather)=><td>{minweather}</td>);
+		const dayr = days.map((days)=><td>{days}</td>);
+		//render method for the weakly weather table
+		render(
+  <table border = "1" align = "center"><tr><td>Day</td>{dayr}</tr><tr><td>Max</td>{maxwr}</tr><tr><td>Min</td>{minwr}</tr></table>,
+  document.getElementById('test')
+);
 
-		});
 		}
-		/*parseWeaklyResponse = (parsed_json) => {
+		parseHourlyResponse = (parsed_json) => {
 	    var hour = [];
 	    var temp = [];
 	    var icon= [];
 	    var pop = [];
-	    var mes1 = "Min";
-	    var mes2 = "Max";
-	    var mes3 = "Day:";
 	    for (var i=0; i<25; i++) {
-		hours.push(parsed_json['hourly_forecast'][i]['FCTTIME']['hour']);
+		hour.push(parsed_json['hourly_forecast'][i]['FCTTIME']['hour']);
 		temp.push(parsed_json['hourly_forecast'][i]['temp']['metric'] );
-		icon.push(parsed_json['hourly_forecast'][i]['icon'] );
+		icon.push(parsed_json['hourly_forecast'][i]['icon_url'] );
 		pop.push(parsed_json['hourly_forecast'][i]['pop'] );
 		}
-		// set states for fields so they could be rendered later on
-		this.setState({
+		const hourr = hour.map((hour)=><td>{hour}</td>);
+		const tempr = temp.map((temp)=><td>{temp}</td>);
+		const popr = pop.map((pop)=><td>{pop}</td>);
+		const iconr = icon.map((icon)=><td><img src = {icon} height = "10" width = "10"/></td>);
+		//render method for the hourly weather table
+
+		render(
+  <table  border = "1" align = "center"><tr><td>Hour</td>{hourr}</tr><tr><td>Temp</td>{tempr}</tr><tr><td>Chance of rain (%)</td>{popr}</tr><tr><td>Icon</td>{iconr}</tr></table>,
+  document.getElementById('test2'));
+  }
+  }
 
 
-
-		});
-		}*/
-}
 

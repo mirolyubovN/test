@@ -13,7 +13,7 @@ export default class Button extends Component {
 		return (
 			<div>
 				<button onClick={clickFunction}>
-					Display Weather you shit!
+					Display Weather please!!!
 				</button>
 			</div>
 		);
