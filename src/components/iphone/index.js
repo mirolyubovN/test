@@ -73,10 +73,10 @@ export default class Iphone extends Component {
 
 				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/><span class={ style.conditions  }> { this.state.test } </span></div>
 				<div class={ style.details }> <br/><br/>
-				<div id = "test">
+				<div id = "test" style = "overflow:auto;">
 				<br/>
 				</div>
-				<div id = "test2">
+				<div id = "test2" style = "overflow:auto;">
 				<br/>
 				</div>
 
