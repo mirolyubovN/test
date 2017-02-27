@@ -1,12 +1,16 @@
 // import preact
 import { h, render, Component } from 'preact';
-// import stylesheets for ipad & button
+// import stylesheets for ipad & buttons
 import style from './style';
 import style_iphone from '../button/style_iphone';
+import style_iphone1 from '../button1/style_iphone';
 // import jquery for API calls
 import $ from 'jquery';
-// import the Button component
+// import the Button components
 import Button from '../button';
+import Button1 from '../button1';
+import Button2 from '../button2';
+import Button3 from '../button3';
 
 export default class Iphone extends Component {
 //var Iphone = React.createClass({
@@ -78,12 +82,20 @@ export default class Iphone extends Component {
 				</div>
 				<div id = "test2" style = "overflow:auto;">
 				<br/>
+                
 				</div>
-
-				 </div>
-				<div class= { style_iphone.container }>
-					{ this.state.display ? <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ > : null }
+                </div>
+                
+                <div class= { style_iphone.container }>
+                { this.state.display ? <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ > : null }
+                </div>
+                
+				<div class= { style_iphone1.container }>
+					{ this.state.display ? <Button1 class={ style_iphone1.button }/ > : null }
+                    { this.state.display ? <Button2 class={ style_iphone1.button }/ > : null }
+                    { this.state.display ? <Button3 class={ style_iphone1.button }/ > : null }
 				</div>
+                
 			</div>
 		);
 	}
