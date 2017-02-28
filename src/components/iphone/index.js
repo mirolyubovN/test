@@ -20,6 +20,8 @@ export default class Iphone extends Component {
 		super(props);
 		// temperature state
 		this.state.temp = "";
+		this.state.hrl = "";
+		this.state.wkl = "";
 		// button display state
 		this.setState({ display: true });
 
@@ -75,26 +77,30 @@ export default class Iphone extends Component {
 					<span class={ tempStyles }>{ this.state.temp }</span>
 				</div>
 
-				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/><span class={ style.conditions  }> { this.state.test } </span></div>
-				<div class={ style.details }> <br/><br/>
-				<div id = "test" style = "overflow:auto;">
-				<br/>
+				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/>
+
+				
+				<div id = "weaklyWeather" style = "overflow:auto;">
+				{this.state.wkl}
 				</div>
-				<div id = "test2" style = "overflow:auto;">
 				<br/>
-                
+				<div id = "hourlyWeather" style = "overflow:auto;">
+				 {this.state.hrl}
 				</div>
+				
                 </div>
                 
-                <div class= { style_iphone.container }>
-                { this.state.display ? <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ > : null }
-                </div>
                 
-				<div class= { style_iphone1.container }>
-					{ this.state.display ? <Button1 class={ style_iphone1.button }/ > : null }
-                    { this.state.display ? <Button2 class={ style_iphone1.button }/ > : null }
-                    { this.state.display ? <Button3 class={ style_iphone1.button }/ > : null }
-				</div>
+                { this.state.display ? <div class= { style_iphone.container }> <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : null }
+               
+                
+				{ this.state.display ? null: 
+					<div class= { style_iphone1.container }>
+					<Button1 class={ style_iphone1.button }/> 
+                     <Button2 class={ style_iphone1.button }/>  
+                    <Button3 class={ style_iphone1.button }/> 
+					</div>}
+
                 
 			</div>
 		);
@@ -132,11 +138,13 @@ export default class Iphone extends Component {
 		const maxwr = maxweather.map((maxweather)=><td>{maxweather}</td>);
 		const minwr = minweather.map((minweather)=><td>{minweather}</td>);
 		const dayr = days.map((days)=><td>{days}</td>);
+		var ttable = <table border = "1" align = "center"><tr><td>Day</td>{dayr}</tr><tr><td>Max</td>{maxwr}</tr><tr><td>Min</td>{minwr}</tr></table>;
+		this.state.wkl = ttable;
 		//render method for the weakly weather table
-		render(
+		/*render(
   <table border = "1" align = "center"><tr><td>Day</td>{dayr}</tr><tr><td>Max</td>{maxwr}</tr><tr><td>Min</td>{minwr}</tr></table>,
-  document.getElementById('test')
-);
+  document.getElementById('weaklyWeather'));*/
+
 
 		}
 		parseHourlyResponse = (parsed_json) => {
@@ -144,7 +152,7 @@ export default class Iphone extends Component {
 	    var temp = [];
 	    var icon= [];
 	    var pop = [];
-	    for (var i=0; i<25; i++) {
+	    for (var i=0; i<24; i++) {
 		hour.push(parsed_json['hourly_forecast'][i]['FCTTIME']['hour']);
 		temp.push(parsed_json['hourly_forecast'][i]['temp']['metric'] );
 		icon.push(parsed_json['hourly_forecast'][i]['icon_url'] );
@@ -155,12 +163,14 @@ export default class Iphone extends Component {
 		const popr = pop.map((pop)=><td>{pop}</td>);
 		const iconr = icon.map((icon)=><td><img src = {icon} height = "10" width = "10"/></td>);
 		//render method for the hourly weather table
+		var mytable = <table  border = "1" align = "center"><tr><td>Hour</td>{hourr}</tr><tr><td>Temp</td>{tempr}</tr><tr><td>Chance of rain (%)</td>{popr}</tr><tr><td>Icon</td>{iconr}</tr></table>;
 
-		render(
+		/*render(
   <table  border = "1" align = "center"><tr><td>Hour</td>{hourr}</tr><tr><td>Temp</td>{tempr}</tr><tr><td>Chance of rain (%)</td>{popr}</tr><tr><td>Icon</td>{iconr}</tr></table>,
-  document.getElementById('test2'));
+  document.getElementById('hourlyWeather'));*/
+		this.setState({hrl:mytable});
   }
-  }
+}
 
 
 
