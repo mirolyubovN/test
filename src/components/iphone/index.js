@@ -80,11 +80,11 @@ export default class Iphone extends Component {
 				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/>
 
 				
-				<div id = "weaklyWeather" style = "overflow:auto;">
+				<div id = "weaklyWeather">
 				{this.state.wkl}
 				</div>
 				<br/>
-				<div id = "hourlyWeather" style = "overflow:auto;">
+				<div id = "hourlyWeather" style = "overflow-y: scroll;">
 				 {this.state.hrl}
 				</div>
 				
