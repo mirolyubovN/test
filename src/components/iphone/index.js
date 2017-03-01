@@ -3,14 +3,14 @@ import { h, render, Component } from 'preact';
 // import stylesheets for ipad & buttons
 import style from './style';
 import style_iphone from '../button/style_iphone';
-import style_iphone1 from '../button1/style_iphone';
+import style_iphone1 from '../buttonWeather/style_iphone';
 // import jquery for API calls
 import $ from 'jquery';
 // import the Button components
-import Button from '../button';
-import Button1 from '../button1';
-import Button2 from '../button2';
-import Button3 from '../button3';
+import DisplayWeatherButton from '../button';
+import WeatherFrameButton from '../buttonWeather';
+import CourtsFrameButton from '../buttonCourts';
+import ResultsFrameButton from '../buttonResults';
 
 export default class Iphone extends Component {
 //var Iphone = React.createClass({
@@ -82,6 +82,28 @@ export default class Iphone extends Component {
                       });
     }
 
+    showWeatherFrame = () => {
+        
+        
+        this.setState({
+                      displayButton: false,
+                      weatherPanel: true,
+                      resultsPanel: false,
+                      courtsPanel: false
+                      });
+    }
+
+    showCourtsFrame = () => {
+        
+        
+        this.setState({
+                      displayButton: false,
+                      weatherPanel: false,
+                      resultsPanel: false,
+                      courtsPanel: true
+                      });
+    }
+
 
 
 	// the main render method for the iphone component
@@ -115,11 +137,12 @@ export default class Iphone extends Component {
                 null }
 
                 {this.state.resultsPanel ? <div>Results Panel</div> : null}
+                {this.state.courtsPanel ? <div>Courts Panel</div> : null}
                 
-                { this.state.displayButton ? <div class= { style_iphone.container }> <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
-                <Button1 class={ style_iphone1.button } clickFunction={ this.fetchWeatherData }/>
-                <Button2 class={ style_iphone1.button }/>
-                <Button3 class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
+                { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
+                <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
+                <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
+                <ResultsFrameButton class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
                 </div></div> }
                 
                 

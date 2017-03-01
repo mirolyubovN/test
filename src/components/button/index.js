@@ -1,7 +1,7 @@
 // import preact
 import { h, render, Component } from 'preact';
 
-export default class Button extends Component {
+export default class DisplayWeatherButton extends Component {
 
 	// rendering a function when the button is clicked
 	render({clickFunction}) {

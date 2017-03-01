@@ -1,7 +1,7 @@
 // import preact
 import { h, render, Component } from 'preact';
 
-export default class Button3 extends Component {
+export default class CourtsFrameButton extends Component {
 
 	// rendering a function when the button is clicked
 	render({clickFunction}) {
@@ -13,7 +13,7 @@ export default class Button3 extends Component {
 		return (
 			<div>
 				<button onClick={clickFunction}>
-					Results
+					Courts
 				</button>
 			</div>
 		);
