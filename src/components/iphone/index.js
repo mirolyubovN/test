@@ -23,7 +23,12 @@ export default class Iphone extends Component {
 		this.state.hrl = "";
 		this.state.wkl = "";
 		// button display state
-		this.setState({ display: true });
+		this.setState({
+                      displayButton: true,
+                      weatherPanel: false,
+                      courstPanel: false,
+                      resultsPanel: false
+                      });
 
 	}
 
@@ -55,9 +60,27 @@ export default class Iphone extends Component {
 			error : function(req, err){ console.log('API call failed ' + err); }
 		})
 
-		// once the data grabbed, hide the button
-		this.setState({ display: false });
+		// once the data grabbed, hide the button and show the main screen of the app - Weather Panel
+		this.setState({
+                      displayButton: false,
+                      weatherPanel: true,
+                      resultsPanel: false,
+                      courtsPanel: false
+                      });
 	}
+    
+    // a call to show results frame
+    showResultsFrame = () => {
+        
+        var resTitle = "This is the results frame";
+        
+        this.setState({
+                      displayButton: false,
+                      weatherPanel: false,
+                      resultsPanel: true,
+                      courtsPanel: false
+                      });
+    }
 
 
 
@@ -71,36 +94,34 @@ export default class Iphone extends Component {
 
 		return (
 			<div class={ style.container }>
-				<div class={ style.header }>
-					<div class={ style.city }>{ this.state.locate }</div>
-					<div class={ style.conditions }>{ this.state.cond }</div>
-					<span class={ tempStyles }>{ this.state.temp }</span>
-				</div>
-
-				<div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/>
-
-				
-				<div id = "weaklyWeather">
-				{this.state.wkl}
-				</div>
-				<br/>
-				<div id = "hourlyWeather" style = "overflow-y: scroll;">
-				 {this.state.hrl}
-				</div>
-				
+                
+                {this.state.weatherPanel
+                ?
+                <div><div class={ style.header }>
+                <div class={ style.city }>{ this.state.locate }</div>
+                <div class={ style.conditions }>{ this.state.cond }</div>
+                <span class={ tempStyles }>{ this.state.temp }</span>
                 </div>
-                
-                
-                { this.state.display ? <div class= { style_iphone.container }> <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : null }
-               
-                
-				{ this.state.display ? null: 
-					<div class= { style_iphone1.container }>
-					<Button1 class={ style_iphone1.button }/> 
-                     <Button2 class={ style_iphone1.button }/>  
-                    <Button3 class={ style_iphone1.button }/> 
-					</div>}
+                <div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/>
+                <div id = "weaklyWeather">
+                {this.state.wkl}
+                </div>
+                <br/>
+                <div id = "hourlyWeather" style = "overflow-y: scroll;">
+                {this.state.hrl}
+                </div>
+                </div> </div>
+                :
+                null }
 
+                {this.state.resultsPanel ? <div>Results Panel</div> : null}
+                
+                { this.state.displayButton ? <div class= { style_iphone.container }> <Button class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
+                <Button1 class={ style_iphone1.button } clickFunction={ this.fetchWeatherData }/>
+                <Button2 class={ style_iphone1.button }/>
+                <Button3 class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
+                </div></div> }
+                
                 
 			</div>
 		);
