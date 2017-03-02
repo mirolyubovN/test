@@ -118,8 +118,8 @@ export default class Iphone extends Component {
 		return (
 			<div class={ style.container }>
 
-                {this.state.weatherPanel
-                ?
+                
+                {this.state.weatherPanel ?
                 <div><div class={ style.header }>
                 <div class={ style.city }>{ this.state.locate }</div>
                 <div class={ style.conditions }>{ this.state.cond }</div>
@@ -183,7 +183,7 @@ export default class Iphone extends Component {
 		const maxwr = maxweather.map((maxweather)=><td>{maxweather}</td>);
 		const minwr = minweather.map((minweather)=><td>{minweather}</td>);
 		const dayr = days.map((days)=><td>{days}</td>);
-		var ttable = <table class = "weatherTable" border = "1" align = "center"><tr><td>Day</td>{dayr}</tr><tr><td>Max</td>{maxwr}</tr><tr><td>Min</td>{minwr}</tr></table>;
+		var ttable = <table class = "weatherTable" border = "1" align = "center"><tr>{dayr}</tr><tr>{maxwr}</tr><tr>{minwr}</tr></table>;
 		this.state.wkl = ttable;
 		//render method for the weakly weather table
 		/*render(
@@ -206,13 +206,9 @@ export default class Iphone extends Component {
 		const hourr = hour.map((hour)=><td>{hour}</td>);
 		const tempr = temp.map((temp)=><td>{temp}</td>);
 		const popr = pop.map((pop)=><td>{pop}</td>);
-		const iconr = icon.map((icon)=><td><img src = {icon} height = "10" width = "10"/></td>);
+		const iconr = icon.map((icon)=><td><img src = {icon} height = "15" width = "15"/></td>);
 		//render method for the hourly weather table
-		var mytable = <table class = "weatherTable" border = "1" align = "center"><tr><td>Hour</td>{hourr}</tr><tr><td>Temp</td>{tempr}</tr><tr><td>Chance of rain (%)</td>{popr}</tr><tr><td>Icon</td>{iconr}</tr></table>;
-
-		/*render(
-  <table  border = "1" align = "center"><tr><td>Hour</td>{hourr}</tr><tr><td>Temp</td>{tempr}</tr><tr><td>Chance of rain (%)</td>{popr}</tr><tr><td>Icon</td>{iconr}</tr></table>,
-  document.getElementById('hourlyWeather'));*/
+		var mytable = <table class = { style.weatherTable }><tr><td></td>{hourr}</tr><tr><td>temp</td>{tempr}</tr><tr><td>pop(%)</td>{popr}</tr><tr><td></td>{iconr}</tr></table>;
 		this.setState({hrl:mytable});
   }
 }
