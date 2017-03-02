@@ -182,7 +182,7 @@ export default class Iphone extends Component {
 		const maxwr = maxweather.map((maxweather)=><td>{maxweather}</td>);
 		const minwr = minweather.map((minweather)=><td>{minweather}</td>);
 		const dayr = days.map((days)=><td>{days}</td>);
-		var ttable = <table border = "1" align = "center"><tr><td>Day</td>{dayr}</tr><tr><td>Max</td>{maxwr}</tr><tr><td>Min</td>{minwr}</tr></table>;
+		var ttable = <table class = "weatherTable" border = "1" align = "center"><tr><td>Day</td>{dayr}</tr><tr><td>Max</td>{maxwr}</tr><tr><td>Min</td>{minwr}</tr></table>;
 		this.state.wkl = ttable;
 		//render method for the weakly weather table
 		/*render(
@@ -207,7 +207,7 @@ export default class Iphone extends Component {
 		const popr = pop.map((pop)=><td>{pop}</td>);
 		const iconr = icon.map((icon)=><td><img src = {icon} height = "10" width = "10"/></td>);
 		//render method for the hourly weather table
-		var mytable = <table  border = "1" align = "center"><tr><td>Hour</td>{hourr}</tr><tr><td>Temp</td>{tempr}</tr><tr><td>Chance of rain (%)</td>{popr}</tr><tr><td>Icon</td>{iconr}</tr></table>;
+		var mytable = <table class = "weatherTable" border = "1" align = "center"><tr><td>Hour</td>{hourr}</tr><tr><td>Temp</td>{tempr}</tr><tr><td>Chance of rain (%)</td>{popr}</tr><tr><td>Icon</td>{iconr}</tr></table>;
 
 		/*render(
   <table  border = "1" align = "center"><tr><td>Hour</td>{hourr}</tr><tr><td>Temp</td>{tempr}</tr><tr><td>Chance of rain (%)</td>{popr}</tr><tr><td>Icon</td>{iconr}</tr></table>,
