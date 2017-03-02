@@ -68,12 +68,12 @@ export default class Iphone extends Component {
                       courtsPanel: false
                       });
 	}
-    
+
     // a call to show results frame
     showResultsFrame = () => {
-        
+
         var resTitle = "This is the results frame";
-        
+
         this.setState({
                       displayButton: false,
                       weatherPanel: false,
@@ -83,8 +83,8 @@ export default class Iphone extends Component {
     }
 
     showWeatherFrame = () => {
-        
-        
+
+
         this.setState({
                       displayButton: false,
                       weatherPanel: true,
@@ -94,8 +94,8 @@ export default class Iphone extends Component {
     }
 
     showCourtsFrame = () => {
-        
-        
+
+
         this.setState({
                       displayButton: false,
                       weatherPanel: false,
@@ -116,7 +116,7 @@ export default class Iphone extends Component {
 
 		return (
 			<div class={ style.container }>
-                
+
                 {this.state.weatherPanel
                 ?
                 <div><div class={ style.header }>
@@ -137,15 +137,26 @@ export default class Iphone extends Component {
                 null }
 
                 {this.state.resultsPanel ? <div>Results Panel</div> : null}
-                {this.state.courtsPanel ? <div>Courts Panel</div> : null}
-                
+                {this.state.courtsPanel ? <div class = { style.header }>
+				<h1 class = { style.courtsText }>Courts</h1>
+				<div class = { style.textFieldDiv }>
+				<form onSubmit={this.buttonHandler}>
+				<label class = {style.location}>
+					Location:
+						<input class = {style.inputTag} type="text" value={this.state.value} onChange={this.handleChange} />
+				</label>
+				<input class = {style.searchButton} type="submit" value="Submit" />
+					</form>
+					</div>
+					</div> : null}
+
                 { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
                 <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
                 <ResultsFrameButton class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
                 </div></div> }
-                
-                
+
+
 			</div>
 		);
 	}
