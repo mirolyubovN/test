@@ -11,6 +11,7 @@ import DisplayWeatherButton from '../button';
 import WeatherFrameButton from '../buttonWeather';
 import CourtsFrameButton from '../buttonCourts';
 import ResultsFrameButton from '../buttonResults';
+import CourtsFrame from '../courtsFrame';
 
 export default class Iphone extends Component {
 //var Iphone = React.createClass({
@@ -137,18 +138,7 @@ export default class Iphone extends Component {
                 null }
 
                 {this.state.resultsPanel ? <div>Results Panel</div> : null}
-                {this.state.courtsPanel ? <div class = { style.header }>
-				<h1 class = { style.courtsText }>Courts</h1>
-				<div class = { style.textFieldDiv }>
-				<form onSubmit={this.buttonHandler}>
-				<label class = {style.location}>
-					Location:
-						<input class = {style.inputTag} type="text" value={this.state.value} onChange={this.handleChange} />
-				</label>
-				<input class = {style.searchButton} type="submit" value="Submit" />
-					</form>
-					</div>
-					</div> : null}
+                {this.state.courtsPanel ? <CourtsFrame /> : null}
 
                 { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
