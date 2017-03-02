@@ -4,6 +4,7 @@ import { h, render, Component } from 'preact';
 import style from './style';
 import style_iphone from '../button/style_iphone';
 import style_iphone1 from '../buttonWeather/style_iphone';
+import styleResults from '../buttonResults/style_iphone';
 // import jquery for API calls
 import $ from 'jquery';
 // import the Button components
@@ -11,6 +12,7 @@ import DisplayWeatherButton from '../button';
 import WeatherFrameButton from '../buttonWeather';
 import CourtsFrameButton from '../buttonCourts';
 import ResultsFrameButton from '../buttonResults';
+import ResultsMoreButton from '../buttonResults';
 import CourtsFrame from '../courtsFrame';
 
 export default class Iphone extends Component {
@@ -30,6 +32,9 @@ export default class Iphone extends Component {
                       courstPanel: false,
                       resultsPanel: false
                       });
+        
+        //state for the table in Results Frame
+        this.state.resultsTable = "";
 
 	}
 
@@ -73,13 +78,23 @@ export default class Iphone extends Component {
     // a call to show results frame
     showResultsFrame = () => {
 
-        var resTitle = "This is the results frame";
+        //create a table in this method, so the render method looks more readable
+        var resTable = <table class={styleResults.tableStyle}> <tbody>
+        <tr>
+        <td class={styleResults.tdStyle}><h2>Ongoing</h2><br/><h3>Federer - Tsonga  6-2 2-1</h3><br/><ResultsMoreButton class={ style_iphone1.button } /></td>
+        </tr>
+        <tr>
+        <td class={styleResults.tdStyle}><h2>Finished</h2><br/><h3>Federer - Nadal  6-0 6-1</h3><br/><ResultsMoreButton class={ style_iphone1.button }/></td>
+        </tr>
+        </tbody>
+        </table>;
 
         this.setState({
                       displayButton: false,
                       weatherPanel: false,
                       resultsPanel: true,
-                      courtsPanel: false
+                      courtsPanel: false,
+                      resultsTable: resTable
                       });
     }
 
@@ -137,7 +152,8 @@ export default class Iphone extends Component {
                 :
                 null }
 
-                {this.state.resultsPanel ? <div>Results Panel</div> : null}
+                {this.state.resultsPanel ? <div><div class={styleResults.titleText}>Results</div>{this.state.resultsTable}</div> : null}
+                
                 {this.state.courtsPanel ? <CourtsFrame /> : null}
 
                 { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
