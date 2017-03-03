@@ -12,7 +12,6 @@ import DisplayWeatherButton from '../button';
 import WeatherFrameButton from '../buttonWeather';
 import CourtsFrameButton from '../buttonCourts';
 import ResultsFrameButton from '../buttonResults';
-import ResultsMoreButton from '../buttonResults';
 import CourtsFrame from '../courtsFrame';
 
 export default class Iphone extends Component {
@@ -30,11 +29,13 @@ export default class Iphone extends Component {
                       displayButton: true,
                       weatherPanel: false,
                       courstPanel: false,
-                      resultsPanel: false
+                      resultsPanel: false,
+                      resultsMoreFrame: false
                       });
         
         //state for the table in Results Frame
         this.state.resultsTable = "";
+        this.state.moreResults = "";
 
 	}
 
@@ -81,10 +82,12 @@ export default class Iphone extends Component {
         //create a table in this method, so the render method looks more readable
         var resTable = <table class={styleResults.tableStyle}> <tbody>
         <tr>
-        <td class={styleResults.tdStyle}><h2>Ongoing</h2><br/><h3>Federer - Tsonga  6-2 2-1</h3><br/><ResultsMoreButton class={ style_iphone1.button } /></td>
+        <td class={styleResults.tdStyle}><h2>Ongoing</h2><br/><h3>Federer - Tsonga  6-2 2-1</h3><br/><button onClick={this.showMoreResults}>
+        More</button></td>
         </tr>
         <tr>
-        <td class={styleResults.tdStyle}><h2>Finished</h2><br/><h3>Federer - Nadal  6-0 6-1</h3><br/><ResultsMoreButton class={ style_iphone1.button }/></td>
+        <td class={styleResults.tdStyle}><h2>Finished</h2><br/><h3>Federer - Nadal  6-0 6-1</h3><br/><button onClick={this.showMoreResults}>
+        More</button></td>
         </tr>
         </tbody>
         </table>;
@@ -94,7 +97,30 @@ export default class Iphone extends Component {
                       weatherPanel: false,
                       resultsPanel: true,
                       courtsPanel: false,
+                      resultsMoreFrame: false,
                       resultsTable: resTable
+                      });
+    }
+    
+    //this method shows a new window on top of results frame to give more specific info about a match
+    showMoreResults = () => {
+        var moreWindow = <table class={styleResults.moreStyle}> <tbody>
+        <tr>
+        <td><h2>Ongoing Federer - Tsonga</h2><br/><h3>Federer has shown a strong play alright bro</h3><br/><button onClick={this.showResultsFrame}>
+        OK</button></td>
+        </tr>
+        <tr>
+        </tr>
+        </tbody>
+        </table>;
+        
+        this.setState({
+                      displayButton: false,
+                      weatherPanel: false,
+                      resultsPanel: true,
+                      courtsPanel: false,
+                      resultsMoreFrame: true,
+                      moreResults: moreWindow
                       });
     }
 
@@ -151,6 +177,8 @@ export default class Iphone extends Component {
                 </div> </div>
                 :
                 null }
+                
+                {this.state.resultsMoreFrame ? <div>{this.state.moreResults}</div> : null}
 
                 {this.state.resultsPanel ? <div><div class={styleResults.titleText}>Results</div>{this.state.resultsTable}</div> : null}
                 
