@@ -157,36 +157,42 @@ export default class Iphone extends Component {
 		/* input the wind speed in km/h*/
 
 		return (
+			
 			<div class={ style.container }>
 
 
                 {this.state.weatherPanel ?
-                	<div>
-                <div class={ style.header }>
-                <div class={ style.city }>{ this.state.locate }</div>
-                <div class={ style.conditions }>{ this.state.cond }</div>
-                <span class={ tempStyles }>{ this.state.temp }</span>
+                <div>	
+	                <div class={ style.header }>
+		                <div class={ style.city }>{ this.state.locate }</div>
+		                <div class={ style.conditions }>{ this.state.cond }</div>
+		                <div class={ tempStyles }>{ this.state.temp }</div>
+	                </div>
+	                
+	                <div class={ style.details }>
+	                	<span class={ style.conditions }>{ this.state.wind }</span>
+	                	<span class={ style.conditions }>{ this.state.feels }</span>
+	                </div>
+	                <div class={ style.details }>
+		                <br/>
+		                <div id = "hourlyWeather"  style = "overflow-x: scroll;">
+		                	{this.state.hrl}
+		                </div>
+		                <div id = "weaklyWeather" style = "overflow-y: scroll;">
+		               	 {this.state.wkl}
+		                </div>
+	                </div> 
                 </div>
-                <div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/>
-
-                <br/>
-                <div id = "hourlyWeather"  style = "overflow-x: scroll;">
-                {this.state.hrl}
-                </div>
-                <div id = "weaklyWeather" style = "overflow-y: scroll;">
-                {this.state.wkl}
-                </div>
-                </div> </div>
                 :
                 null }
 
                 {this.state.resultsMoreFrame ? <div>{this.state.moreResults}</div> : null}
 
-                {this.state.resultsPanel ? <div><div class={styleResults.titleText}>Results</div>{this.state.resultsTable}</div> : null}
+                {this.state.resultsPanel ? <div class={styleResults.titleText}>Results <br/>{this.state.resultsTable}</div> : null}
 
                 {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp}/> : null}
 
-                { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData } />  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
+                { this.state.displayButton ? <div class = {style_iphone.container}> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData } />  </div> : <div class = {style.navigation}><div class = {style_iphone1.container}>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
                 <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
                 <ResultsFrameButton class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
@@ -194,6 +200,7 @@ export default class Iphone extends Component {
 
 
 			</div>
+
 		);
 	}
 
