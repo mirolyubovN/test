@@ -161,18 +161,20 @@ export default class Iphone extends Component {
 
                 
                 {this.state.weatherPanel ?
-                <div><div class={ style.header }>
+                	<div>
+                <div class={ style.header }>
                 <div class={ style.city }>{ this.state.locate }</div>
                 <div class={ style.conditions }>{ this.state.cond }</div>
                 <span class={ tempStyles }>{ this.state.temp }</span>
                 </div>
                 <div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/>
-                <div id = "weaklyWeather">
-                {this.state.wkl}
-                </div>
+                
                 <br/>
-                <div id = "hourlyWeather" style = "overflow-y: scroll;">
+                <div id = "hourlyWeather"  style = "overflow-x: scroll;">
                 {this.state.hrl}
+                </div>
+                <div id = "weaklyWeather" style = "overflow-y: scroll;">
+                {this.state.wkl}
                 </div>
                 </div> </div>
                 :
@@ -200,7 +202,7 @@ export default class Iphone extends Component {
 		var temp_c = parsed_json['current_observation']['temp_c'];
 		var conditions = parsed_json['current_observation']['weather'];
 		var ws = "Wind speed: " + parsed_json['current_observation']['wind_kph'] + "km/h";
-		var feelsLike = "Feels like : " + parsed_json['current_observation']['feelslike_c'] + "C";
+		var feelsLike = "Feels like : " + parsed_json['current_observation']['feelslike_c'] + "°";
 
 		// set states for fields so they could be rendered later on
 		this.setState({
@@ -216,19 +218,20 @@ export default class Iphone extends Component {
 		var days = [];
 	    var maxweather = [];
 	    var minweather = [];
-	    var mes1 = "Min";
-	    var mes2 = "Max";
-	    var mes3 = "Day";
-	    for (var i=0; i<8; i++) {
-		days.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday_short']);
+	    var pop = [];
+	    days.push ("Weakly forecast");maxweather.push("max");minweather.push("min");pop.push("rain");
+	    for (var i=0; i<7; i++) {
+		days.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday']);
 		maxweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'] );
 		minweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius'] );
+		pop.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['pop']+"%");
 		}
-		const maxwr = maxweather.map((maxweather)=><td>{maxweather}</td>);
-		const minwr = minweather.map((minweather)=><td>{minweather}</td>);
-		const dayr = days.map((days)=><td>{days}</td>);
-		var ttable = <table class = "weatherTable" border = "1" align = "center"><tr>{dayr}</tr><tr>{maxwr}</tr><tr>{minwr}</tr></table>;
-		this.state.wkl = ttable;
+		const maxwr = maxweather.map((maxweather)=><td class = {style.td2}>{maxweather}</td>);
+		const minwr = minweather.map((minweather)=><td class = {style.td2}>{minweather}</td>);
+		const popr = pop.map((pop)=><td class = {style.td3}>{pop}</td>);
+		const dayr = days.map((days)=><td class = {style.td}>{days}</td>);
+		var table = <table class = { style.weatherTableTest }><tr class = {style.tr}>{dayr}</tr><tr class = {style.tr}>{maxwr}</tr><tr class = {style.tr}>{minwr}</tr><tr class = {style.tr}>{popr}</tr></table>;
+		this.state.wkl = table;
 		//render method for the weakly weather table
 		/*render(
   <table border = "1" align = "center"><tr><td>Day</td>{dayr}</tr><tr><td>Max</td>{maxwr}</tr><tr><td>Min</td>{minwr}</tr></table>,
@@ -243,16 +246,21 @@ export default class Iphone extends Component {
 	    var pop = [];
 	    for (var i=0; i<24; i++) {
 		hour.push(parsed_json['hourly_forecast'][i]['FCTTIME']['hour']);
-		temp.push(parsed_json['hourly_forecast'][i]['temp']['metric'] );
+		temp.push(parsed_json['hourly_forecast'][i]['temp']['metric'] +"°");
 		icon.push(parsed_json['hourly_forecast'][i]['icon_url'] );
-		pop.push(parsed_json['hourly_forecast'][i]['pop'] );
+		if (parsed_json['hourly_forecast'][i]['pop']==0){
+		pop.push("");
 		}
+		else {pop.push(parsed_json['hourly_forecast'][i]['pop'] +"%");}
+		}
+		//pop.push(parsed_json['hourly_forecast'][i]['pop']);}
+		hour[0]="Now";
 		const hourr = hour.map((hour)=><td>{hour}</td>);
 		const tempr = temp.map((temp)=><td>{temp}</td>);
-		const popr = pop.map((pop)=><td>{pop}</td>);
-		const iconr = icon.map((icon)=><td><img src = {icon} height = "15" width = "15"/></td>);
+		const popr = pop.map((pop)=><td class = {style.pop}>{pop}</td>);
+		const iconr = icon.map((icon)=><td><img src = {icon} height = "20" width = "20"/></td>);
 		//render method for the hourly weather table
-		var mytable = <table class = { style.weatherTable }><tr><td></td>{hourr}</tr><tr><td>temp</td>{tempr}</tr><tr><td>pop(%)</td>{popr}</tr><tr><td></td>{iconr}</tr></table>;
+		var mytable = <table class = { style.weatherTable }><tr>{hourr}</tr><tr>{tempr}</tr><tr>{popr}</tr><tr>{iconr}</tr></table>;
 		this.setState({hrl:mytable});
   }
 }
