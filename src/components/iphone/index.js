@@ -37,7 +37,7 @@ export default class Iphone extends Component {
 	// a call to fetch weather data via wunderground
 	fetchWeatherData = () => {
 		// API URL with a structure of : ttp://api.wunderground.com/api/key/feature/q/country-code/city.json
-		var url = "http://api.wunderground.com/api/6e014545bd8a1361/conditions/q/UK/London.json";
+		var url = "http://api.wunderground.com/api/d6a1a74944c61307/conditions/q/UK/London.json";
 		$.ajax({
 			url: url,
 			dataType: "jsonp",
@@ -45,7 +45,7 @@ export default class Iphone extends Component {
 			error : function(req, err){ console.log('API call failed ' + err); }
 		})
 
-		url = "http://api.wunderground.com/api/6e014545bd8a1361/forecast10day/q/UK/London.json";
+		url = "http://api.wunderground.com/api/d6a1a74944c61307/forecast10day/q/UK/London.json";
 		$.ajax({
 			url: url,
 			dataType: "jsonp",
@@ -53,7 +53,7 @@ export default class Iphone extends Component {
 			error : function(req, err){ console.log('API call failed ' + err); }
 		})
 
-		url = "http://api.wunderground.com/api/6e014545bd8a1361/hourly/q/UK/London.json";
+		url = "http://api.wunderground.com/api/d6a1a74944c61307/hourly/q/UK/London.json";
 		$.ajax({
 			url: url,
 			dataType: "jsonp",
@@ -140,7 +140,7 @@ export default class Iphone extends Component {
                 {this.state.resultsPanel ? <div>Results Panel</div> : null}
                 {this.state.courtsPanel ? <CourtsFrame /> : null}
 
-                { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData }/ >  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
+                { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData } />  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
                 <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
                 <ResultsFrameButton class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
@@ -216,6 +216,3 @@ export default class Iphone extends Component {
 		this.setState({hrl:mytable});
   }
 }
-
-
-
