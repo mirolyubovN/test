@@ -82,11 +82,11 @@ export default class Iphone extends Component {
         //create a table in this method, so the render method looks more readable
         var resTable = <table class={styleResults.tableStyle}> <tbody>
         <tr>
-        <td class={styleResults.tdStyle}><h2>Ongoing</h2><br/><h3>Federer - Tsonga  6-2 2-1</h3><br/><button onClick={this.showMoreResults}>
+        <td class={styleResults.tdStyle}>Ongoing<br/>Federer - Tsonga  6-2 2-1<br/><button onClick={this.showMoreResults}>
         More</button></td>
         </tr>
         <tr>
-        <td class={styleResults.tdStyle}><h2>Finished</h2><br/><h3>Federer - Nadal  6-0 6-1</h3><br/><button onClick={this.showMoreResults}>
+        <td class={styleResults.tdStyle}>Finished<br/>Federer - Nadal  6-0 6-1<br/><button onClick={this.showMoreResults}>
         More</button></td>
         </tr>
         </tbody>
@@ -106,8 +106,8 @@ export default class Iphone extends Component {
     showMoreResults = () => {
         var moreWindow = <table class={styleResults.moreStyle}> <tbody>
         <tr>
-        <td><h2>Ongoing Federer - Tsonga</h2><br/><h3>Federer has shown a strong play alright bro</h3><br/><button onClick={this.showResultsFrame}>
-        OK</button></td>
+        <td><h4>Ongoing Federer - Tsonga<br/><br/>Federer has shown a strong play<br/><br/><br/><button onClick={this.showResultsFrame}>
+        OK</button></h4></td>
         </tr>
         <tr>
         </tr>
@@ -186,7 +186,7 @@ export default class Iphone extends Component {
                 :
                 null }
 
-                {this.state.resultsMoreFrame ? <div>{this.state.moreResults}</div> : null}
+                {this.state.resultsMoreFrame ? <div class={styleResults.div}><div class={styleResults.myDiv}>{this.state.moreResults}</div></div> : null}
 
                 {this.state.resultsPanel ? <div class={styleResults.titleText}>Results <br/>{this.state.resultsTable}</div> : null}
 
