@@ -226,6 +226,7 @@ export default class Iphone extends Component {
 		minweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius'] );
 		pop.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['pop']+"%");
 		}
+		days[1] = "Today";
 		const maxwr = maxweather.map((maxweather)=><td class = {style.td2}>{maxweather}</td>);
 		const minwr = minweather.map((minweather)=><td class = {style.td2}>{minweather}</td>);
 		const popr = pop.map((pop)=><td class = {style.td3}>{pop}</td>);
