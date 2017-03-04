@@ -28,11 +28,11 @@ export default class Iphone extends Component {
 		this.setState({
                       displayButton: true,
                       weatherPanel: false,
-                      courstPanel: false,
+                      courtsPanel: false,
                       resultsPanel: false,
                       resultsMoreFrame: false
                       });
-        
+
         //state for the table in Results Frame
         this.state.resultsTable = "";
         this.state.moreResults = "";
@@ -101,7 +101,7 @@ export default class Iphone extends Component {
                       resultsTable: resTable
                       });
     }
-    
+
     //this method shows a new window on top of results frame to give more specific info about a match
     showMoreResults = () => {
         var moreWindow = <table class={styleResults.moreStyle}> <tbody>
@@ -113,7 +113,7 @@ export default class Iphone extends Component {
         </tr>
         </tbody>
         </table>;
-        
+
         this.setState({
                       displayButton: false,
                       weatherPanel: false,
@@ -159,7 +159,7 @@ export default class Iphone extends Component {
 		return (
 			<div class={ style.container }>
 
-                
+
                 {this.state.weatherPanel ?
                 	<div>
                 <div class={ style.header }>
@@ -168,7 +168,7 @@ export default class Iphone extends Component {
                 <span class={ tempStyles }>{ this.state.temp }</span>
                 </div>
                 <div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/>
-                
+
                 <br/>
                 <div id = "hourlyWeather"  style = "overflow-x: scroll;">
                 {this.state.hrl}
@@ -179,12 +179,12 @@ export default class Iphone extends Component {
                 </div> </div>
                 :
                 null }
-                
+
                 {this.state.resultsMoreFrame ? <div>{this.state.moreResults}</div> : null}
 
                 {this.state.resultsPanel ? <div><div class={styleResults.titleText}>Results</div>{this.state.resultsTable}</div> : null}
-                
-                {this.state.courtsPanel ? <CourtsFrame /> : null}
+
+                {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp}/> : null}
 
                 { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData } />  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>

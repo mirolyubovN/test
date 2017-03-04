@@ -1,6 +1,7 @@
 //Import preact
 import { h, render, Button, Component } from 'preact';
 import style from './style.less';
+import CourtDetails from '../courtDetails';
 import mainWindow from '../iphone';
 import app from '../app.js';
 import $ from 'jquery';
@@ -14,6 +15,8 @@ export default class courtsFrame extends Component {
 		this.state.showCourts = true;
 		this.state.showDetails = false;
 		this.handleChange = this.handleChange.bind(this);
+		this.weatherValue = props.weatherValue;
+		this.courtName = "";
 		//this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	// rendering a function when the button is clicked
@@ -34,23 +37,69 @@ export default class courtsFrame extends Component {
 							</form>
 						</div>
 					</div>
-					<div>
-						{ this.state.searchDone ? this.state.test : <span>No Search done</span> }
+					<div class = {style.bodyDiv}>
+						<hr/>
+						{ this.state.searchDone ? this.generateCourts(this.weatherValue) : <span>No Search done<br/></span> }
 					</div>
 				</div>
 					: null}
 
-				{this.state.showDetails ? this.showCourtDetails : null}
+				{this.state.showDetails ? <CourtDetails
+											courtName = {this.courtName}
+											goBack = {this.goBack}
+											/> : null}
 
 
 			</div>
 		);
 	}
 
-	showCourtDetails = () =>{
-		return(
-			<span>This is court details</span>
-		);
+	generateCourts(weatherValue){
+		if({weatherValue} > "0"){
+			return(
+				<div>
+					<p id = "afterSearchLabel">The following are all Tennis Courts in our database</p>
+					<table class = {style.courtsTable}>
+						<tr>
+							<td class = {style.courtsTable}>RedBridge Court</td>
+							<td class = {style.courtsTable}><a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "RedBridge")}>
+								Select
+							</a></td>
+						</tr>
+						<tr>
+							<td class = {style.courtsTable}>WestWay Court</td>
+							<td class = {style.courtsTable}><a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "WestWay")}>
+								Select
+							</a></td>
+						</tr>
+					</table>
+				</div>
+			);
+		}else{
+			return(
+				<span>{weatherValue} value is less than 0</span>
+			);
+		}
+	}
+
+	goBack = () =>{
+		this.setState({
+			showCourts: true,
+			showDetails: false
+		});
+		this.courtName = "";
+		console.log("CourtName in go back" + this.courtName);
+	}
+
+
+	handleClick(event, courtN){
+		this.courtName = courtN;
+		console.log("CourtName at button click" + this.courtName);
+		event.preventDefault();
+		this.setState({
+			showCourts : false,
+			showDetails : true
+		});
 	}
 
 	handleChange(event) {
@@ -62,19 +111,5 @@ export default class courtsFrame extends Component {
 		event.preventDefault();
 		console.log("Button works!");
 		this.setState({searchDone: true});
-		var i =this.handleBodyDiv();
-	}
-
-	handleBodyDiv(){
-		console.log("was in handleBodyDiv");
-
-			var table = <table border = "1"><tr><td> hello</td></tr></table>;
-			this.state.test =table;
-
-	}
-
-	insertSearchData(){
-			this.state.test
-
 	}
 }
