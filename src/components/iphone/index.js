@@ -13,6 +13,7 @@ import WeatherFrameButton from '../buttonWeather';
 import CourtsFrameButton from '../buttonCourts';
 import ResultsFrameButton from '../buttonResults';
 import CourtsFrame from '../courtsFrame';
+import ResultsFrame from '../resultsFrame';
 
 export default class Iphone extends Component {
 //var Iphone = React.createClass({
@@ -79,48 +80,12 @@ export default class Iphone extends Component {
     // a call to show results frame
     showResultsFrame = () => {
 
-        //create a table in this method, so the render method looks more readable
-        var resTable = <table class={styleResults.tableStyle}> <tbody>
-        <tr>
-        <td class={styleResults.tdStyle}><h2>Ongoing</h2><br/><h3>Federer - Tsonga  6-2 2-1</h3><br/><button onClick={this.showMoreResults}>
-        More</button></td>
-        </tr>
-        <tr>
-        <td class={styleResults.tdStyle}><h2>Finished</h2><br/><h3>Federer - Nadal  6-0 6-1</h3><br/><button onClick={this.showMoreResults}>
-        More</button></td>
-        </tr>
-        </tbody>
-        </table>;
-
         this.setState({
                       displayButton: false,
                       weatherPanel: false,
                       resultsPanel: true,
                       courtsPanel: false,
                       resultsMoreFrame: false,
-                      resultsTable: resTable
-                      });
-    }
-
-    //this method shows a new window on top of results frame to give more specific info about a match
-    showMoreResults = () => {
-        var moreWindow = <table class={styleResults.moreStyle}> <tbody>
-        <tr>
-        <td><h2>Ongoing Federer - Tsonga</h2><br/><h3>Federer has shown a strong play alright bro</h3><br/><button onClick={this.showResultsFrame}>
-        OK</button></td>
-        </tr>
-        <tr>
-        </tr>
-        </tbody>
-        </table>;
-
-        this.setState({
-                      displayButton: false,
-                      weatherPanel: false,
-                      resultsPanel: true,
-                      courtsPanel: false,
-                      resultsMoreFrame: true,
-                      moreResults: moreWindow
                       });
     }
 
@@ -157,36 +122,40 @@ export default class Iphone extends Component {
 		/* input the wind speed in km/h*/
 
 		return (
+			
 			<div class={ style.container }>
 
 
                 {this.state.weatherPanel ?
-                	<div>
-                <div class={ style.header }>
-                <div class={ style.city }>{ this.state.locate }</div>
-                <div class={ style.conditions }>{ this.state.cond }</div>
-                <span class={ tempStyles }>{ this.state.temp }</span>
+                <div>	
+	                <div class={ style.header }>
+		                <div class={ style.city }>{ this.state.locate }</div>
+		                <div class={ style.conditions }>{ this.state.cond }</div>
+		                <div class={ tempStyles }>{ this.state.temp }</div>
+	                </div>
+	                
+	                <div class={ style.details }>
+	                	<span class={ style.conditions }>{ this.state.wind }</span>
+	                	<span class={ style.conditions }>{ this.state.feels }</span>
+	                </div>
+	                <div class={ style.details }>
+		                <br/>
+		                <div id = "hourlyWeather"  style = "overflow-x: scroll;">
+		                	{this.state.hrl}
+		                </div>
+		                <div id = "weaklyWeather" style = "overflow-y: scroll;">
+		               	 {this.state.wkl}
+		                </div>
+	                </div> 
                 </div>
-                <div class={ style.details }><span class={ style.conditions  }>{ this.state.wind }</span><br/><span class={ style.conditions  }>{ this.state.feels }</span><br/>
-
-                <br/>
-                <div id = "hourlyWeather"  style = "overflow-x: scroll;">
-                {this.state.hrl}
-                </div>
-                <div id = "weaklyWeather" style = "overflow-y: scroll;">
-                {this.state.wkl}
-                </div>
-                </div> </div>
                 :
                 null }
 
-                {this.state.resultsMoreFrame ? <div>{this.state.moreResults}</div> : null}
-
-                {this.state.resultsPanel ? <div><div class={styleResults.titleText}>Results</div>{this.state.resultsTable}</div> : null}
+                {this.state.resultsPanel ? <ResultsFrame /> : null}
 
                 {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp}/> : null}
 
-                { this.state.displayButton ? <div class= { style_iphone.container }> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData } />  </div> : <div class = {style.navigation}><div class= { style_iphone1.container }>
+                { this.state.displayButton ? <div class = {style_iphone.container}> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData } />  </div> : <div class = {style.navigation}><div class = {style_iphone1.container}>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
                 <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
                 <ResultsFrameButton class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
@@ -194,6 +163,7 @@ export default class Iphone extends Component {
 
 
 			</div>
+
 		);
 	}
 
