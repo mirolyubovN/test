@@ -27,7 +27,6 @@ export default class Iphone extends Component {
 		this.state.wkl = "";
 		// button display state
 		this.setState({
-                      displayButton: true,
                       weatherPanel: false,
                       courtsPanel: false,
                       resultsPanel: false,
@@ -37,10 +36,13 @@ export default class Iphone extends Component {
         //state for the table in Results Frame
         this.state.resultsTable = "";
         this.state.moreResults = "";
+      
 
 	}
 
-
+  componentDidMount(){
+     this.fetchWeatherData();// theck if the weather data is loaded and then render occurs
+  }
 	// a call to fetch weather data via wunderground
 	fetchWeatherData = () => {
 		// API URL with a structure of : ttp://api.wunderground.com/api/key/feature/q/country-code/city.json
@@ -70,7 +72,6 @@ export default class Iphone extends Component {
 
 		// once the data grabbed, hide the button and show the main screen of the app - Weather Panel
 		this.setState({
-                      displayButton: false,
                       weatherPanel: true,
                       resultsPanel: false,
                       courtsPanel: false
@@ -81,7 +82,6 @@ export default class Iphone extends Component {
     showResultsFrame = () => {
 
         this.setState({
-                      displayButton: false,
                       weatherPanel: false,
                       resultsPanel: true,
                       courtsPanel: false,
@@ -93,7 +93,6 @@ export default class Iphone extends Component {
 
 
         this.setState({
-                      displayButton: false,
                       weatherPanel: true,
                       resultsPanel: false,
                       courtsPanel: false
@@ -104,7 +103,6 @@ export default class Iphone extends Component {
 
 
         this.setState({
-                      displayButton: false,
                       weatherPanel: false,
                       resultsPanel: false,
                       courtsPanel: true
@@ -115,11 +113,9 @@ export default class Iphone extends Component {
 
 	// the main render method for the iphone component
 	render() {
-		// check if temperature data is fetched, if so add the sign styling to the page
-		const tempStyles = this.state.test ? `${style.temperature} ${style.filled}` : style.temperature;
+		
+		const tempStyles = style.temperature;
 
-		// display all weather data
-		/* input the wind speed in km/h*/
 
 		return (
 			
@@ -135,7 +131,7 @@ export default class Iphone extends Component {
 	                </div>
 	                
 	                <div class={ style.details }>
-	                	<span class={ style.conditions }>{ this.state.wind }</span>
+	                	<span class={ style.conditions }>{ this.state.wind }</span><br/>
 	                	<span class={ style.conditions }>{ this.state.feels }</span>
 	                </div>
 	                <div class={ style.details }>
@@ -155,16 +151,17 @@ export default class Iphone extends Component {
 
                 {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp}/> : null}
 
-                { this.state.displayButton ? <div class = {style_iphone.container}> <DisplayWeatherButton class={ style_iphone.button } clickFunction={ this.fetchWeatherData } />  </div> : <div class = {style.navigation}><div class = {style_iphone1.container}>
+                <div class = {style.navigation}><div class = {style_iphone1.container}>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
                 <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
                 <ResultsFrameButton class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
-                </div></div> }
+                </div></div> 
 
 
 			</div>
 
 		);
+
 	}
 
 	parseResponse = (parsed_json) => {
@@ -189,12 +186,12 @@ export default class Iphone extends Component {
 	    var maxweather = [];
 	    var minweather = [];
 	    var pop = [];
-	    days.push ("Weakly forecast");maxweather.push("max");minweather.push("min");pop.push("rain");
+	    days.push ("Weakly forecast");maxweather.push("Max");minweather.push("Min");pop.push(" POP");
 	    for (var i=0; i<7; i++) {
 		days.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday']);
 		maxweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'] );
 		minweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius'] );
-		pop.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['pop']+"%");
+		pop.push((Math.ceil(parsed_json['forecast']['simpleforecast']['forecastday'][i]['pop'])/5)*5+"%");// maky sure the pop value is nice->rounded up to 5%
 		}
 		days[1] = "Today";
 		const maxwr = maxweather.map((maxweather)=><td class = {style.td2}>{maxweather}</td>);
@@ -203,35 +200,30 @@ export default class Iphone extends Component {
 		const dayr = days.map((days)=><td class = {style.td}>{days}</td>);
 		var table = <table class = { style.weatherTableTest }><tr class = {style.tr}>{dayr}</tr><tr class = {style.tr}>{maxwr}</tr><tr class = {style.tr}>{minwr}</tr><tr class = {style.tr}>{popr}</tr></table>;
 		this.state.wkl = table;
-		//render method for the weakly weather table
-		/*render(
-  <table border = "1" align = "center"><tr><td>Day</td>{dayr}</tr><tr><td>Max</td>{maxwr}</tr><tr><td>Min</td>{minwr}</tr></table>,
-  document.getElementById('weaklyWeather'));*/
-
-
-		}
+		
+	}
 		parseHourlyResponse = (parsed_json) => {
-	    var hour = [];
-	    var temp = [];
-	    var icon= [];
-	    var pop = [];
-	    for (var i=0; i<24; i++) {
-		hour.push(parsed_json['hourly_forecast'][i]['FCTTIME']['hour']);
-		temp.push(parsed_json['hourly_forecast'][i]['temp']['metric'] +"°");
-		icon.push(parsed_json['hourly_forecast'][i]['icon_url'] );
-		if (parsed_json['hourly_forecast'][i]['pop']==0){
-		pop.push("");
-		}
-		else {pop.push(parsed_json['hourly_forecast'][i]['pop'] +"%");}
-		}
-		//pop.push(parsed_json['hourly_forecast'][i]['pop']);}
-		hour[0]="Now";
-		const hourr = hour.map((hour)=><td>{hour}</td>);
-		const tempr = temp.map((temp)=><td>{temp}</td>);
-		const popr = pop.map((pop)=><td class = {style.pop}>{pop}</td>);
-		const iconr = icon.map((icon)=><td><img src = {icon} height = "20" width = "20"/></td>);
-		//render method for the hourly weather table
-		var mytable = <table class = { style.weatherTable }><tr>{hourr}</tr><tr>{tempr}</tr><tr>{popr}</tr><tr>{iconr}</tr></table>;
-		this.setState({hrl:mytable});
-  }
+		    var hour = [];
+		    var temp = [];
+		    var icon= [];
+		    var pop = [];
+		    for (var i=0; i<24; i++) {
+			hour.push(parsed_json['hourly_forecast'][i]['FCTTIME']['hour']);
+			temp.push(parsed_json['hourly_forecast'][i]['temp']['metric'] +"°");
+			icon.push(parsed_json['hourly_forecast'][i]['icon_url'] );
+			if (parsed_json['hourly_forecast'][i]['pop']==0)
+			pop.push("");
+			
+			else pop.push(Math.ceil((parsed_json['hourly_forecast'][i]['pop'])/5)*5 +"%");} // maky sure the pop value is nice->rounded up to 5%
+			
+			//pop.push(parsed_json['hourly_forecast'][i]['pop']);}
+			hour[0]="Now";
+			const hourr = hour.map((hour)=><td>{hour}</td>);
+			const tempr = temp.map((temp)=><td>{temp}</td>);
+			const popr = pop.map((pop)=><td class = {style.pop}>{pop}</td>);
+			const iconr = icon.map((icon)=><td><img src = {icon} height = "20" width = "20"/></td>);
+			//render method for the hourly weather table
+			var mytable = <table class = { style.weatherTable }><tr>{hourr}</tr><tr>{tempr}</tr><tr>{popr}</tr><tr>{iconr}</tr></table>;
+			this.setState({hrl:mytable});
+  		}
 }
