@@ -11,11 +11,10 @@ export default class courtsFrame extends Component {
 		super(props);
 		this.state= {value: ''};
 		this.state.searchDone = false;
-		this.state.test = "";
 		this.state.showCourts = true;
 		this.state.showDetails = false;
+		this.recommended = "";
 		this.handleChange = this.handleChange.bind(this);
-		this.weatherValue = props.weatherValue;
 		this.courtName = "";
 		//this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -36,10 +35,10 @@ export default class courtsFrame extends Component {
 								<input type="submit" value="Submit" />
 							</form>
 						</div>
+						<hr/>
 					</div>
 					<div class = {style.bodyDiv}>
-						<hr/>
-						{ this.state.searchDone ? this.generateCourts(this.weatherValue) : <span>No Search done<br/></span> }
+						{ this.state.searchDone ? this.generateCourts(this.props.weatherValue) : <span>No Search done<br/></span> }
 					</div>
 				</div>
 					: null}
@@ -56,23 +55,14 @@ export default class courtsFrame extends Component {
 
 	generateCourts(weatherValue){
 		if({weatherValue} > "0"){
+			this.recommended = "Indoors";
 			return(
 				<div>
-					<p id = "afterSearchLabel">The following are all Tennis Courts in our database</p>
-					<table class = {style.courtsTable}>
-						<tr>
-							<td class = {style.courtsTable}>RedBridge Court</td>
-							<td class = {style.courtsTable}><a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "RedBridge")}>
-								Select
-							</a></td>
-						</tr>
-						<tr>
-							<td class = {style.courtsTable}>WestWay Court</td>
-							<td class = {style.courtsTable}><a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "WestWay")}>
-								Select
-							</a></td>
-						</tr>
-					</table>
+					<span id = "afterSearchLabel">The following are all Tennis Courts in our database<br/>No its {this.props.weatherValue}&#8451;</span>
+					<div>
+						{this.getInCourts()}
+					</div>
+					{this.getOutCourts()}
 				</div>
 			);
 		}else{
@@ -80,6 +70,202 @@ export default class courtsFrame extends Component {
 				<span>{weatherValue} value is less than 0</span>
 			);
 		}
+	}
+
+	getInCourts(){
+		return(
+			<div class = {style.needSpace}>
+				<table class = {style.courtsTable} cellpadding="5">
+					{this.recommended === "Indoors" ? <caption>Recommended</caption> : <caption>Other</caption>}
+					<tr>
+						<td class = {style.courtsTable}>
+							<div class = {style.upperDiv}>
+								<div class = {style.nameDiv}>
+									RedBridge Court
+								</div>
+								<div class = {style.courtTypeDiv}>
+									Type: In
+								</div>
+							</div>
+							<div class = {style.lowerDiv}>
+								Contact Details: 020 8498 1000
+							</div>
+						</td>
+						<td class = {style.courtsTable}>
+							<div class = {style.buttonDiv}>
+								<a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "RedBridge")}>
+									Select
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class = {style.courtsTable}>
+							<div class = {style.upperDiv}>
+								<div class = {style.nameDiv}>
+									WestWay Court
+								</div>
+								<div class = {style.courtTypeDiv}>
+									Type: In
+								</div>
+							</div>
+							<div class = {style.lowerDiv}>
+								Contact Details: 0333 005 0442
+							</div>
+						</td>
+						<td class = {style.courtsTable}>
+							<div class = {style.buttonDiv}>
+								<a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "WestWay")}>
+									Select
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class = {style.courtsTable}>
+							<div class = {style.upperDiv}>
+								<div class = {style.nameDiv}>
+									Islington Court
+								</div>
+								<div class = {style.courtTypeDiv}>
+									Type: In/Out
+								</div>
+							</div>
+							<div class = {style.lowerDiv}>
+								Contact Details: 020 3793 6880
+							</div>
+						</td>
+						<td class = {style.courtsTable}>
+							<div class = {style.buttonDiv}>
+								<a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "Islington")}>
+									Select
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class = {style.courtsTable}>
+							<div class = {style.upperDiv}>
+								<div class = {style.nameDiv}>
+									Raynes Park Court
+								</div>
+								<div class = {style.courtTypeDiv}>
+									Type: In/Out
+								</div>
+							</div>
+							<div class = {style.lowerDiv}>
+								Contact Details: 020 8543 8020
+							</div>
+						</td>
+						<td class = {style.courtsTable}>
+							<div class = {style.buttonDiv}>
+								<a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "RaynesPark")}>
+									Select
+								</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		);
+	}
+
+	getOutCourts(){
+		return(
+			<div class = {style.needSpace}>
+				<table class = {style.courtsTable} cellpadding="5">
+					{this.recommended === "Outdoors" ? <caption>Recommended</caption> : <caption>Other</caption>}
+					<tr>
+						<td class = {style.courtsTable}>
+							<div class = {style.upperDiv}>
+								<div class = {style.nameDiv}>
+									Finsbury Park Court
+								</div>
+								<div class = {style.courtTypeDiv}>
+									Type: Out
+								</div>
+							</div>
+							<div class = {style.lowerDiv}>
+								Contact Details: None
+							</div>
+						</td>
+						<td class = {style.courtsTable}>
+							<div class = {style.buttonDiv}>
+								<a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "FinsburyPark")}>
+									Select
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class = {style.courtsTable}>
+							<div class = {style.upperDiv}>
+								<div class = {style.nameDiv}>
+									Clapham Common Court
+								</div>
+								<div class = {style.courtTypeDiv}>
+									Type: Out
+								</div>
+							</div>
+							<div class = {style.lowerDiv}>
+								Contact Details: 0207 223 9836
+							</div>
+						</td>
+						<td class = {style.courtsTable}>
+							<div class = {style.buttonDiv}>
+								<a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "ClaphamCommon")}>
+									Select
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class = {style.courtsTable}>
+							<div class = {style.upperDiv}>
+								<div class = {style.nameDiv}>
+									Bethnal Green Park Court
+								</div>
+								<div class = {style.courtTypeDiv}>
+									Type: Out
+								</div>
+							</div>
+							<div class = {style.lowerDiv}>
+								Contact Details: None
+							</div>
+						</td>
+						<td class = {style.courtsTable}>
+							<div class = {style.buttonDiv}>
+								<a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "BethnalGreen")}>
+									Select
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class = {style.courtsTable}>
+							<div class = {style.upperDiv}>
+								<div class = {style.nameDiv}>
+									Ravenscourt Park Court
+								</div>
+								<div class = {style.courtTypeDiv}>
+									Type: Out
+								</div>
+							</div>
+							<div class = {style.lowerDiv}>
+								Contact Details: 0207602 2226
+							</div>
+						</td>
+						<td class = {style.courtsTable}>
+							<div class = {style.buttonDiv}>
+								<a class = {style.detailsButton} href="#" onClick={(event) => this.handleClick(event, "RavenscourtPark")}>
+									Select
+								</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		);
 	}
 
 	goBack = () =>{
