@@ -22,20 +22,29 @@ export default class resultsFrame extends Component {
 	render(){
 		return(
 			<div>
-               
                <h2>Results</h2>
                {this.state.resultsMoreFrame ? <div class={style.div}><div class={style.myDiv}>{this.state.moreResults}</div></div> : null}
+               <div class={style.bodyDiv}>
                <table class={style.tableStyle}> <tbody>
                <tr>
-               <td class={style.tdStyle}>Ongoing<br/>Federer - Tsonga  6-2 2-1<br/><button onClick={this.showMoreResults}>
-               More</button></td>
+               <td class={style.tdStyle}><h3>Ongoing</h3><br/><center>Federer - Nadal  6-0 6-1<br/><button onClick={this.showMoreResults}>
+               More</button></center></td>
                </tr>
                <tr>
-               <td class={style.tdStyle}>Finished<br/>Federer - Nadal  6-0 6-1<br/><button onClick={this.showMoreResults}>
-               More</button></td>
+               <td class={style.tdStyle}><h3>Finished</h3><br/><center>Federer - Nadal  6-0 6-1<br/><button onClick={this.showMoreResults}>
+               More</button></center></td>
+               </tr>
+               <tr>
+               <td class={style.tdStyle}><h3>Finished</h3><br/><center>Federer - Nadal  6-0 6-1<br/><button onClick={this.showMoreResults}>
+               More</button></center></td>
+               </tr>
+               <tr>
+               <td class={style.tdStyle}><h3>Finished</h3><br/><center>Federer - Nadal  6-0 6-1<br/><button onClick={this.showMoreResults}>
+               More</button></center></td>
                </tr>
                </tbody>
                </table>
+               </div>
 			</div>
 		);
 	}
