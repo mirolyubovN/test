@@ -14,6 +14,7 @@ import CourtsFrameButton from '../buttonCourts';
 import ResultsFrameButton from '../buttonResults';
 import CourtsFrame from '../courtsFrame';
 import ResultsFrame from '../resultsFrame';
+import rainImage from './images/45768.svg';
 
 export default class Iphone extends Component {
 //var Iphone = React.createClass({
@@ -190,7 +191,7 @@ export default class Iphone extends Component {
 	    var pop = [];
 	    var todayPop =parsed_json['forecast']['simpleforecast']['forecastday'][0]['pop'];
 	    this.state.pop = todayPop;
-	    days.push ("Weakly forecast");maxweather.push("Max");minweather.push("Min");pop.push(" POP");
+	    days.push ("Weakly forecast");maxweather.push("Max");minweather.push("Min");pop.push(<img src ={rainImage} style ={"height:20px; width :20px;"}/>);
 	    for (var i=0; i<7; i++) {
 		days.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday']);
 		maxweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'] );
