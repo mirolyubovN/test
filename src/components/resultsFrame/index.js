@@ -7,6 +7,8 @@ import SpainImage from './Images/spain.png';
 import RussiaImage from './Images/russia.png';
 import UKImage from './Images/uk.png';
 import SerbiaImage from './Images/serbia.png';
+import RolandGarrosImage from './Images/france.png';
+import WimbledonImage from './Images/wimbledon.png';
 import app from '../app.js';
 export default class resultsFrame extends Component {
 
@@ -27,24 +29,25 @@ export default class resultsFrame extends Component {
 	render(){
 		return(
 			<div>
-               <h2>Results</h2>
+               <h1>Results</h1>
                {this.state.resultsMoreFrame ? <div class={style.div}><div class={style.myDiv}>{this.state.moreResults}</div></div> : null}
+               <hr/>
                <div class={style.bodyDiv}>
                <table class={style.tableStyle}> <tbody>
                <tr>
-               <td class={style.tdStyle}><h3>Ongoing</h3><br/><center><h4><img src={SwitzerlandImage} alt={"Switzerland"} style={"vertical-align:middle; width:32px; height:22px;"}/> Federer - <img src={SpainImage} style={"vertical-align:middle; width:32px; height:22px;"} alt={"Switzerland"} /> Nadal <br/> <b>6-0 6-1</b><br/><br/><button onClick={this.showMoreResults}>
+               <td class={style.tdStyle}><h2>Ongoing</h2><img src={RolandGarrosImage} style={"position: absolute; top: 0px; right: 0px; width:64px; height: 64px;"}/><br/><center><h4><img src={SwitzerlandImage} alt={"Switzerland"} style={"vertical-align:middle; width:32px; height:22px;"}/> Federer - <img src={SpainImage} style={"vertical-align:middle; width:32px; height:22px;"} alt={"Switzerland"} /> Nadal <br/><br/><h3>6-0 6-1</h3><br/><button onClick={this.showMoreResults}>
                More</button><br/></h4></center></td>
                </tr>
                <tr>
-               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={RussiaImage} alt={"Russia"} style={"vertical-align:middle; width:32px; height:22px;"}/> Davydenko - <img src={SerbiaImage} style={"vertical-align:middle; width:32px; height:22px;"} alt={"Serbia"}/> Djokovic <br/> <b>7-6 (7-2) 6-3</b><br/><br/><button onClick={this.showMoreResults}>
+               <td class={style.tdStyle}><h2>Finished</h2><br/><center><h4><img src={RussiaImage} alt={"Russia"} style={"vertical-align:middle; width:32px; height:22px;"}/> Davydenko - <img src={SerbiaImage} style={"vertical-align:middle; width:32px; height:22px;"} alt={"Serbia"}/> Djokovic <br/><h3>7-6 (7-2) 6-3</h3><br/><button onClick={this.showMoreResults}>
                More</button><br/></h4></center></td>
                </tr>
                <tr>
-               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={UKImage} alt={"United Kingdom"} style={"vertical-align:middle; width:32px; height:22px;"}/> Murray - <img src={SpainImage}  alt={"Switzerland"} style={"vertical-align:middle; width:32px; height:22px;"}/> Wawrinka <br/> <b>6-0 6-1</b><br/><br/><button onClick={this.showMoreResults}>
+               <td class={style.tdStyle}><h2>Finished</h2><br/><center><h4><img src={UKImage} alt={"United Kingdom"} style={"vertical-align:middle; width:32px; height:22px;"}/> Murray - <img src={SpainImage}  alt={"Switzerland"} style={"vertical-align:middle; width:32px; height:22px;"}/> Wawrinka <br/><h3>6-0 6-1</h3><br/><br/><button onClick={this.showMoreResults}>
                More</button><br/></h4></center></td>
                </tr>
                <tr>
-               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={SpainImage} alt={"Spain"} style={"vertical-align:middle; width:32px; height:22px;"}/> Ferrer - <img src={RussiaImage} alt={"Russia"} style={"vertical-align:middle; width:32px; height:22px;"}/> Safin <br/><b>6-0 6-1</b><br/><br/><button onClick={this.showMoreResults}>
+               <td class={style.tdStyle}><h2>Finished</h2><br/><center><h4><img src={SpainImage} alt={"Spain"} style={"vertical-align:middle; width:32px; height:22px;"}/> Ferrer - <img src={RussiaImage} alt={"Russia"} style={"vertical-align:middle; width:32px; height:22px;"}/> Safin <br/><br/><h3>6-0 6-1</h3><br/><button onClick={this.showMoreResults}>
                More</button><br/></h4></center></td>
                </tr>
                </tbody>
