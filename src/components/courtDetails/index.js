@@ -61,7 +61,7 @@ export default class courtsDetails extends Component {
 				" starting at £10.50 off-peak and £12.50 during peak times.";
 			this.courtRating = 4;
 			return(
-				<img src={IndoorEastredbridge} alt={"Mountain View"} style={"width:400px; height:150px;"}/>
+				<img src={IndoorEastredbridge} style={"width:400px; height:150px;"}/>
 			);
 		}else if(this.props.courtName === "WestWay"){
 			this.description = "WestWay court has 8 indoor acrylic courts, and 2 outdoor floodlit clay courts." +
@@ -69,7 +69,7 @@ export default class courtsDetails extends Component {
 				"It is an LTA Accredited Performance Centre with top of the range coaching staff.";
 			this.courtRating = 4;
 			return(
-				<img src={IndoorWestwestway} alt={"Mountain View"} style={"width:400px; height:150px;"}/>
+				<img src={IndoorWestwestway} style={"width:400px; height:150px;"}/>
 			);
 		}else if(this.props.courtName === "Islington") {
 			this.description = "The Islington Tennis Centre is one of the biggest indoor courts in London." +
@@ -80,7 +80,7 @@ export default class courtsDetails extends Component {
 				" indoor courts make it well worth a visit.";
 			this.courtRating = 3;
 			return (
-				<img src={IndoorNorthIslington} alt={"Mountain View"} style={"width:400px; height:150px;"}/>
+				<img src={IndoorNorthIslington} style={"width:400px; height:150px;"}/>
 			);
 		}else if(this.props.courtName === "RaynesPark") {
 			this.description = "David Lloyd Raynes Park offer 21 tennis courts, 9 of which are indoor. " +
@@ -89,7 +89,7 @@ export default class courtsDetails extends Component {
 				"senior coaching.";
 			this.courtRating = 5;
 			return (
-				<img src={IndoorSouthRaynesPark} alt={"Mountain View"} style={"width:400px; height:150px;"}/>
+				<img src={IndoorSouthRaynesPark} style={"width:400px; height:150px;"}/>
 			);
 		}else if(this.props.courtName === "FinsburyPark") {
 			this.description = "Finsbury Park Tennis Courts are plonked in the middle of Finsbury Park and are " +
@@ -99,7 +99,7 @@ export default class courtsDetails extends Component {
 				"adults and junior sessions available.";
 			this.courtRating = 4;
 			return (
-				<img src={OutdoorNorthFinsburyPark} alt={"Mountain View"} style={"width:400px; height:150px;"}/>
+				<img src={OutdoorNorthFinsburyPark} style={"width:400px; height:150px;"}/>
 			);
 		}else if(this.props.courtName === "ClaphamCommon") {
 			this.description = "Clapham Common has 8 outdoor macadam courts; 5 floodlit and 3 without floodlights." +
@@ -108,7 +108,7 @@ export default class courtsDetails extends Component {
 				" all and costs £8 per hour.";
 			this.courtRating = 3;
 			return (
-				<img src={OutdoorSouthClaphamCommon} alt={"Mountain View"} style={"width:400px; height:150px;"}/>
+				<img src={OutdoorSouthClaphamCommon} style={"width:400px; height:150px;"}/>
 			);
 		}else if(this.props.courtName === "BethnalGreen") {
 			this.description = "Bethnal Green Park Tennis Centre has 4 macadam hard courts, recently resurfaced and" +
@@ -118,14 +118,14 @@ export default class courtsDetails extends Component {
 				"and on your mobile, for just £6 per hour.";
 			this.courtRating = 4;
 			return (
-				<img src={OutdoorEastBethnalGreen} alt={"Mountain View"} style={"width:400px; height:150px;"}/>
+				<img src={OutdoorEastBethnalGreen} style={"width:400px; height:150px;"}/>
 			);
 		}else if(this.props.courtName === "RavenscourtPark") {
 			this.description = "Ravenscourt Park Tennis has seven outdoor macadam courts. Unfortunately they’re " +
 				"not floodlit, but at just £5 an hour they are still a steal.";
 			this.courtRating = 2;
 			return (
-				<img src={OutdoorWestRavenscourtPark} alt={"Mountain View"} style={"width:400px; height:150px;"}/>
+				<img src={OutdoorWestRavenscourtPark} style={"width:400px; height:150px;"}/>
 			);
 		}
 	}
