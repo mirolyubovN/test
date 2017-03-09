@@ -150,7 +150,7 @@ export default class Iphone extends Component {
                 {this.state.resultsPanel ? <ResultsFrame /> : null}
 
                 {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp}/> : null}
-
+                <br/>
                 <div class = {style.navigation}><div class = {style_iphone1.container}>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
                 <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
@@ -191,6 +191,9 @@ export default class Iphone extends Component {
 		days.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday']);
 		maxweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'] );
 		minweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius'] );
+		if(parsed_json['forecast']['simpleforecast']['forecastday'][i]['pop']<5)
+			pop.push("5%");
+		else
 		pop.push((Math.ceil(parsed_json['forecast']['simpleforecast']['forecastday'][i]['pop'])/5)*5+"%");// maky sure the pop value is nice->rounded up to 5%
 		}
 		days[1] = "Today";
