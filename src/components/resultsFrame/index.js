@@ -4,6 +4,9 @@ import style from './style.less';
 import mainWindow from '../iphone';
 import SwitzerlandImage from './Images/switzerland.png';
 import SpainImage from './Images/spain.png';
+import RussiaImage from './Images/russia.png';
+import UKImage from './Images/uk.png';
+import SerbiaImage from './Images/serbia.png';
 import app from '../app.js';
 export default class resultsFrame extends Component {
 
@@ -29,19 +32,19 @@ export default class resultsFrame extends Component {
                <div class={style.bodyDiv}>
                <table class={style.tableStyle}> <tbody>
                <tr>
-               <td class={style.tdStyle}><h3>Ongoing</h3><br/><center><h4><img src={SwitzerlandImage} alt={"Switzerland"} style={"width:32px; height:22px;"}/> Federer - <img src={SpainImage} alt={"Switzerland"} style={"width:32px; height:22px;"}/> Nadal  6-0 6-1<br/><br/><button onClick={this.showMoreResults}>
+               <td class={style.tdStyle}><h3>Ongoing</h3><br/><center><h4><img src={SwitzerlandImage} alt={"Switzerland"} style={"vertical-align:middle; width:32px; height:22px;"}/> Federer - <img src={SpainImage} style={"vertical-align:middle; width:32px; height:22px;"} alt={"Switzerland"} /> Nadal <br/> <b>6-0 6-1</b><br/><br/><button onClick={this.showMoreResults}>
                More</button><br/></h4></center></td>
                </tr>
                <tr>
-               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={SwitzerlandImage} alt={"Switzerland"} style={"width:32px; height:22px;"}/> Wawrinka - <img src={SpainImage} alt={"Switzerland"} style={"width:32px; height:22px;"}/> Ferrer  7-6 (7-2) 6-3<br/><br/><button onClick={this.showMoreResults}>
+               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={RussiaImage} alt={"Russia"} style={"vertical-align:middle; width:32px; height:22px;"}/> Davydenko - <img src={SerbiaImage} style={"vertical-align:middle; width:32px; height:22px;"} alt={"Serbia"}/> Djokovic <br/> <b>7-6 (7-2) 6-3</b><br/><br/><button onClick={this.showMoreResults}>
                More</button><br/></h4></center></td>
                </tr>
                <tr>
-               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={SwitzerlandImage} alt={"Switzerland"} style={"width:32px; height:22px;"}/> Federer - <img src={SpainImage} alt={"Switzerland"} style={"width:32px; height:22px;"}/> Nadal  6-0 6-1<br/><br/><button onClick={this.showMoreResults}>
+               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={UKImage} alt={"United Kingdom"} style={"vertical-align:middle; width:32px; height:22px;"}/> Murray - <img src={SpainImage}  alt={"Switzerland"} style={"vertical-align:middle; width:32px; height:22px;"}/> Wawrinka <br/> <b>6-0 6-1</b><br/><br/><button onClick={this.showMoreResults}>
                More</button><br/></h4></center></td>
                </tr>
                <tr>
-               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={SwitzerlandImage} alt={"Switzerland"} style={"width:32px; height:22px;"}/> Federer - <img src={SpainImage} alt={"Switzerland"} style={"width:32px; height:22px;"}/> Nadal  6-0 6-1<br/><br/><button onClick={this.showMoreResults}>
+               <td class={style.tdStyle}><h3>Finished</h3><br/><center><h4><img src={SpainImage} alt={"Spain"} style={"vertical-align:middle; width:32px; height:22px;"}/> Ferrer - <img src={RussiaImage} alt={"Russia"} style={"vertical-align:middle; width:32px; height:22px;"}/> Safin <br/><b>6-0 6-1</b><br/><br/><button onClick={this.showMoreResults}>
                More</button><br/></h4></center></td>
                </tr>
                </tbody>
