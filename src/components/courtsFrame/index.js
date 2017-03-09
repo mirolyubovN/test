@@ -55,7 +55,7 @@ export default class courtsFrame extends Component {
 	}
 
 	generateCourts(weatherValue, pop){
-		if({weatherValue} < "10" && {pop} > "50"){
+		if(weatherValue < "10" && pop > "50"){
 			this.recommended = "Indoors";
 			return(
 				<div>
