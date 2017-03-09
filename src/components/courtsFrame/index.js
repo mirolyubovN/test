@@ -9,7 +9,7 @@ export default class courtsFrame extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state= {value: ''};
+		this.state= {locationValue: ''};
 		this.state.searchDone = false;
 		this.state.showCourts = true;
 		this.state.showDetails = false;
@@ -30,7 +30,7 @@ export default class courtsFrame extends Component {
 							<form onSubmit={this.buttonHandler}>
 								<label>
 									Location:
-									<input type="text" value={this.state.value} onChange={this.handleChange} />
+									<input type="text" placeholder="PostCode" value={this.state.value} onChange={this.handleChange} />
 								</label>
 								<input type="submit" value="Submit" />
 							</form>
@@ -46,6 +46,7 @@ export default class courtsFrame extends Component {
 				{this.state.showDetails ? <CourtDetails
 											courtName = {this.courtName}
 											goBack = {this.goBack}
+											userAddress = {this.state.locationValue}
 											/> : null}
 
 
@@ -88,7 +89,7 @@ export default class courtsFrame extends Component {
 								</div>
 							</div>
 							<div class = {style.lowerDiv}>
-								Contact Details: 020 8498 1000
+								Contact: 020 8498 1000
 							</div>
 						</td>
 						<td class = {style.courtsTable}>
@@ -110,7 +111,7 @@ export default class courtsFrame extends Component {
 								</div>
 							</div>
 							<div class = {style.lowerDiv}>
-								Contact Details: 0333 005 0442
+								Contact: 0333 005 0442
 							</div>
 						</td>
 						<td class = {style.courtsTable}>
@@ -132,7 +133,7 @@ export default class courtsFrame extends Component {
 								</div>
 							</div>
 							<div class = {style.lowerDiv}>
-								Contact Details: 020 3793 6880
+								Contact: 020 3793 6880
 							</div>
 						</td>
 						<td class = {style.courtsTable}>
@@ -154,7 +155,7 @@ export default class courtsFrame extends Component {
 								</div>
 							</div>
 							<div class = {style.lowerDiv}>
-								Contact Details: 020 8543 8020
+								Contact: 020 8543 8020
 							</div>
 						</td>
 						<td class = {style.courtsTable}>
@@ -186,7 +187,7 @@ export default class courtsFrame extends Component {
 								</div>
 							</div>
 							<div class = {style.lowerDiv}>
-								Contact Details: None
+								Contact: None
 							</div>
 						</td>
 						<td class = {style.courtsTable}>
@@ -208,7 +209,7 @@ export default class courtsFrame extends Component {
 								</div>
 							</div>
 							<div class = {style.lowerDiv}>
-								Contact Details: 0207 223 9836
+								Contact: 0207 223 9836
 							</div>
 						</td>
 						<td class = {style.courtsTable}>
@@ -230,7 +231,7 @@ export default class courtsFrame extends Component {
 								</div>
 							</div>
 							<div class = {style.lowerDiv}>
-								Contact Details: None
+								Contact: None
 							</div>
 						</td>
 						<td class = {style.courtsTable}>
@@ -252,7 +253,7 @@ export default class courtsFrame extends Component {
 								</div>
 							</div>
 							<div class = {style.lowerDiv}>
-								Contact Details: 0207602 2226
+								Contact: 0207602 2226
 							</div>
 						</td>
 						<td class = {style.courtsTable}>
@@ -289,13 +290,18 @@ export default class courtsFrame extends Component {
 	}
 
 	handleChange(event) {
-		this.setState({value: event.target.value});
+		this.setState({locationValue: event.target.value});
 	}
 
 	buttonHandler = (event) =>{
-		alert('A name was submitted: ' + this.state.value);
-		event.preventDefault();
-		console.log("Button works!");
-		this.setState({searchDone: true});
+		var location = this.state.locationValue.replace(" ", "");
+		if(location.length <= 7 && location.length >=5){
+			event.preventDefault();
+			console.log("Button works!");
+			this.setState({searchDone: true});
+		}else{
+			event.preventDefault();
+			alert("Invalid postcode was submitted. Try again");
+		}
 	}
 }

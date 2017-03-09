@@ -36,7 +36,7 @@ export default class Iphone extends Component {
         //state for the table in Results Frame
         this.state.resultsTable = "";
         this.state.moreResults = "";
-      
+
 
 	}
 
@@ -113,23 +113,23 @@ export default class Iphone extends Component {
 
 	// the main render method for the iphone component
 	render() {
-		
+
 		const tempStyles = style.temperature;
 
 
 		return (
-			
+
 			<div class={ style.container }>
 
 
                 {this.state.weatherPanel ?
-                <div>	
+                <div>
 	                <div class={ style.header }>
 		                <div class={ style.city }>{ this.state.locate }</div>
 		                <div class={ style.conditions }>{ this.state.cond }</div>
 		                <div class={ tempStyles }>{ this.state.temp }</div>
 	                </div>
-	                
+
 	                <div class={ style.details }>
 	                	<span class={ style.conditions }>{ this.state.wind }</span><br/>
 	                	<span class={ style.conditions }>{ this.state.feels }</span>
@@ -142,7 +142,7 @@ export default class Iphone extends Component {
 		                <div id = "weaklyWeather" style = "overflow-y: scroll;">
 		               	 {this.state.wkl}
 		                </div>
-	                </div> 
+	                </div>
                 </div>
                 :
                 null }
@@ -155,7 +155,7 @@ export default class Iphone extends Component {
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
                 <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
                 <ResultsFrameButton class={ style_iphone1.button } clickFunction={ this.showResultsFrame }/>
-                </div></div> 
+                </div></div>
 
 
 			</div>
@@ -200,7 +200,7 @@ export default class Iphone extends Component {
 		const dayr = days.map((days)=><td class = {style.td}>{days}</td>);
 		var table = <table class = { style.weatherTableTest }><tr class = {style.tr}>{dayr}</tr><tr class = {style.tr}>{maxwr}</tr><tr class = {style.tr}>{minwr}</tr><tr class = {style.tr}>{popr}</tr></table>;
 		this.state.wkl = table;
-		
+
 	}
 		parseHourlyResponse = (parsed_json) => {
 		    var hour = [];
@@ -213,9 +213,9 @@ export default class Iphone extends Component {
 			icon.push(parsed_json['hourly_forecast'][i]['icon_url'] );
 			if (parsed_json['hourly_forecast'][i]['pop']==0)
 			pop.push("");
-			
+
 			else pop.push(Math.ceil((parsed_json['hourly_forecast'][i]['pop'])/5)*5 +"%");} // maky sure the pop value is nice->rounded up to 5%
-			
+
 			//pop.push(parsed_json['hourly_forecast'][i]['pop']);}
 			hour[0]="Now";
 			const hourr = hour.map((hour)=><td>{hour}</td>);
