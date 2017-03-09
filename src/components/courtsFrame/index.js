@@ -16,7 +16,6 @@ export default class courtsFrame extends Component {
 		this.recommended = "";
 		this.handleChange = this.handleChange.bind(this);
 		this.courtName = "";
-		//this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	// rendering a function when the button is clicked
 	render(){
@@ -38,7 +37,7 @@ export default class courtsFrame extends Component {
 						<hr/>
 					</div>
 					<div class = {style.bodyDiv}>
-						{ this.state.searchDone ? this.generateCourts(this.props.weatherValue, this.props.pop) : <span>No Search done<br/></span> }
+						{ this.state.searchDone ? this.generateCourts(this.props.weatherValue, this.props.pop) : null }
 					</div>
 				</div>
 					: null}
