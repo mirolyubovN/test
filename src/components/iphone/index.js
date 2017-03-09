@@ -14,6 +14,7 @@ import CourtsFrameButton from '../buttonCourts';
 import ResultsFrameButton from '../buttonResults';
 import CourtsFrame from '../courtsFrame';
 import ResultsFrame from '../resultsFrame';
+import rainImage from './images/45768.svg';
 
 export default class Iphone extends Component {
 //var Iphone = React.createClass({
@@ -25,6 +26,7 @@ export default class Iphone extends Component {
 		this.state.temp = "";
 		this.state.hrl = "";
 		this.state.wkl = "";
+		this.state.pop = "";
 		// button display state
 		this.setState({
                       weatherPanel: false,
@@ -127,7 +129,7 @@ export default class Iphone extends Component {
 	                <div class={ style.header }>
 		                <div class={ style.city }>{ this.state.locate }</div>
 		                <div class={ style.conditions }>{ this.state.cond }</div>
-		                <div class={ tempStyles }>{ this.state.temp }</div>
+		                <div class={ tempStyles }>{ this.state.temp } </div>
 	                </div>
 
 	                <div class={ style.details }>
@@ -149,8 +151,8 @@ export default class Iphone extends Component {
 
                 {this.state.resultsPanel ? <ResultsFrame /> : null}
 
-                {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp}/> : null}
-
+                {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp} pop = {this.state.pop}/> : null}
+                <br/>
                 <div class = {style.navigation}><div class = {style_iphone1.container}>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
                 <CourtsFrameButton class={ style_iphone1.button } clickFunction={ this.showCourtsFrame}/>
@@ -171,6 +173,7 @@ export default class Iphone extends Component {
 		var ws = "Wind speed: " + parsed_json['current_observation']['wind_kph'] + "km/h";
 		var feelsLike = "Feels like : " + parsed_json['current_observation']['feelslike_c'] + "°";
 
+
 		// set states for fields so they could be rendered later on
 		this.setState({
 			locate: location,
@@ -186,11 +189,16 @@ export default class Iphone extends Component {
 	    var maxweather = [];
 	    var minweather = [];
 	    var pop = [];
-	    days.push ("Weakly forecast");maxweather.push("Max");minweather.push("Min");pop.push(" POP");
+	    var todayPop =parsed_json['forecast']['simpleforecast']['forecastday'][0]['pop'];
+	    this.state.pop = todayPop;
+	    days.push ("Weakly forecast");maxweather.push("Max");minweather.push("Min");pop.push(<img src ={rainImage} style ={"height:20px; width :20px;"}/>);
 	    for (var i=0; i<7; i++) {
 		days.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday']);
 		maxweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'] );
 		minweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius'] );
+		if(parsed_json['forecast']['simpleforecast']['forecastday'][i]['pop']<5)
+			pop.push("5%");
+		else
 		pop.push((Math.ceil(parsed_json['forecast']['simpleforecast']['forecastday'][i]['pop'])/5)*5+"%");// maky sure the pop value is nice->rounded up to 5%
 		}
 		days[1] = "Today";
