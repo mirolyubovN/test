@@ -25,6 +25,7 @@ export default class Iphone extends Component {
 		this.state.temp = "";
 		this.state.hrl = "";
 		this.state.wkl = "";
+		this.state.pop = "";
 		// button display state
 		this.setState({
                       weatherPanel: false,
@@ -127,7 +128,7 @@ export default class Iphone extends Component {
 	                <div class={ style.header }>
 		                <div class={ style.city }>{ this.state.locate }</div>
 		                <div class={ style.conditions }>{ this.state.cond }</div>
-		                <div class={ tempStyles }>{ this.state.temp }</div>
+		                <div class={ tempStyles }>{ this.state.temp } </div>
 	                </div>
 
 	                <div class={ style.details }>
@@ -149,7 +150,7 @@ export default class Iphone extends Component {
 
                 {this.state.resultsPanel ? <ResultsFrame /> : null}
 
-                {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp}/> : null}
+                {this.state.courtsPanel ? <CourtsFrame weatherValue = {this.state.temp} pop = {this.state.pop}/> : null}
                 <br/>
                 <div class = {style.navigation}><div class = {style_iphone1.container}>
                 <WeatherFrameButton class={ style_iphone1.button } clickFunction={ this.showWeatherFrame}/>
@@ -171,6 +172,7 @@ export default class Iphone extends Component {
 		var ws = "Wind speed: " + parsed_json['current_observation']['wind_kph'] + "km/h";
 		var feelsLike = "Feels like : " + parsed_json['current_observation']['feelslike_c'] + "°";
 
+
 		// set states for fields so they could be rendered later on
 		this.setState({
 			locate: location,
@@ -186,6 +188,8 @@ export default class Iphone extends Component {
 	    var maxweather = [];
 	    var minweather = [];
 	    var pop = [];
+	    var todayPop =parsed_json['forecast']['simpleforecast']['forecastday'][0]['pop'];
+	    this.state.pop = todayPop;
 	    days.push ("Weakly forecast");maxweather.push("Max");minweather.push("Min");pop.push(" POP");
 	    for (var i=0; i<7; i++) {
 		days.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday']);

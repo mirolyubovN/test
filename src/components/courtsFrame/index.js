@@ -38,7 +38,7 @@ export default class courtsFrame extends Component {
 						<hr/>
 					</div>
 					<div class = {style.bodyDiv}>
-						{ this.state.searchDone ? this.generateCourts(this.props.weatherValue) : <span>No Search done<br/></span> }
+						{ this.state.searchDone ? this.generateCourts(this.props.weatherValue, this.props.pop) : <span>No Search done<br/></span> }
 					</div>
 				</div>
 					: null}
@@ -54,8 +54,8 @@ export default class courtsFrame extends Component {
 		);
 	}
 
-	generateCourts(weatherValue){
-		if({weatherValue} > "0"){
+	generateCourts(weatherValue, pop){
+		if({weatherValue} < "10" && {pop} > "50"){
 			this.recommended = "Indoors";
 			return(
 				<div>
@@ -67,8 +67,15 @@ export default class courtsFrame extends Component {
 				</div>
 			);
 		}else{
+			this.recommended = "OutDoors";
 			return(
-				<span>{weatherValue} value is less than 0</span>
+				<div>
+					<span id = "afterSearchLabel">The following are all Tennis Courts in our database<br/>No its {this.props.weatherValue}&#8451;</span>
+					<div>
+						{this.getOutCourts()}
+					</div>
+					{this.getInCourts()}
+				</div>
 			);
 		}
 	}
@@ -175,7 +182,7 @@ export default class courtsFrame extends Component {
 		return(
 			<div class = {style.needSpace}>
 				<table class = {style.courtsTable} cellpadding="5">
-					{this.recommended === "Outdoors" ? <caption>Recommended</caption> : <caption>Other</caption>}
+					{this.recommended === "OutDoors" ? <caption>Recommended</caption> : <caption>Other</caption>}
 					<tr>
 						<td class = {style.courtsTable}>
 							<div class = {style.upperDiv}>
