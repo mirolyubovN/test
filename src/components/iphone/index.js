@@ -14,7 +14,7 @@ import CourtsFrameButton from '../buttonCourts';
 import ResultsFrameButton from '../buttonResults';
 import CourtsFrame from '../courtsFrame';
 import ResultsFrame from '../resultsFrame';
-import rainImage from './images/45768.svg';
+import rainImage from './images/rainIcon.svg';
 
 export default class Iphone extends Component {
 //var Iphone = React.createClass({
@@ -191,7 +191,7 @@ export default class Iphone extends Component {
 	    var pop = [];
 	    var todayPop =parsed_json['forecast']['simpleforecast']['forecastday'][0]['pop'];
 	    this.state.pop = todayPop;
-	    days.push ("Weakly forecast");maxweather.push("Max");minweather.push("Min");pop.push(<img src ={rainImage} style ={"height:20px; width :20px;"}/>);
+	    days.push ("Weakly forecast");maxweather.push("Max");minweather.push("Min");pop.push(<img src ={rainImage} style ={"height:15px; width :15px;"}/>);
 	    for (var i=0; i<7; i++) {
 		days.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['weekday']);
 		maxweather.push(parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius'] );
@@ -222,7 +222,7 @@ export default class Iphone extends Component {
 			if (parsed_json['hourly_forecast'][i]['pop']==0)
 			pop.push("");
 
-			else pop.push(Math.ceil((parsed_json['hourly_forecast'][i]['pop'])/5)*5 +"%");} // maky sure the pop value is nice->rounded up to 5%
+			else pop.push(Math.ceil((parsed_json['hourly_forecast'][i]['pop'])/5)*5 +"%");} // make sure the pop value is nice->rounded up to 5%
 
 			//pop.push(parsed_json['hourly_forecast'][i]['pop']);}
 			hour[0]="Now";
